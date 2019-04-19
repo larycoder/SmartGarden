@@ -1,6 +1,6 @@
 #!/bin/bash
 user="root"
-password="hoamoclan123"
+password=""
 db="smartgarden"
 sql=$(cat mysql_script.sql) 
 mysql -u "$user" -p"$password" <<EOF
