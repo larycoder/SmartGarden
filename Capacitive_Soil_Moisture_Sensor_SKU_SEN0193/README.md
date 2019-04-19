@@ -1,5 +1,5 @@
 # Capacitive Soil Moisture Sensor - SKU_SEN0193
-![](SEN0193.jpg)
+![](pics/SEN0193.jpg)
 
 ## Specification
 
@@ -27,4 +27,15 @@ GND	   ||  GND
 A0	   ||  Analog pin 
 ```
 
-![Schematicxx](SEN0193-line.png)
+![Schematicxx](pics/SEN0193-line.png)
+
+## Calibration
+### Calibration Range
+![Calibration Range](pics/SEN0193-test.png)
+
+```
+The components on this board are NOT waterproof, do not expose to moisture further than the red
+line. (If you want to protect components from the elements, try using a length of wide heat shrink
+tubing around the upper-section of the board.) There is an inverse ratio between the sensor output
+value and soil moisture. 
+```
