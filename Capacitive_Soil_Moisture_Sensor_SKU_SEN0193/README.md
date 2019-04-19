@@ -1,5 +1,5 @@
 # Capacitive Soil Moisture Sensor - SKU_SEN0193
-![](SEN0193.jpg)
+![](SEN0193.jpg){ width=50% }
 
 ## Specification
 
