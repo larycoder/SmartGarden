@@ -1,5 +1,5 @@
 # Capacitive Soil Moisture Sensor - SKU_SEN0193
-![](SEN0193.jpg){ width=50% }
+![](pics/SEN0193.jpg)
 
 ## Specification
 
@@ -27,4 +27,4 @@ GND	   ||  GND
 A0	   ||  Analog pin 
 ```
 
-![Schematicxx](SEN0193-line.png)
+![Schematicxx](pics/SEN0193-line.png)
