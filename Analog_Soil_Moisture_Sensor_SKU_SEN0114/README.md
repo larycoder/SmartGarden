@@ -1,5 +1,5 @@
 # Analog Soil Moisture Sensor - SKU_SEN0114
-![](SEN0114.jpg)
+![](pics/SEN0114.jpg)
 
 ## Specification 
 
@@ -18,7 +18,7 @@
 
 ## Schematic 
 
-![](SEN0114-schematic.png)
+![](pics/SEN0114-schematic.png)
 
 ## Requirements
 
