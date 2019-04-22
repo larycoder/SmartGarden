@@ -4,21 +4,28 @@
  * A class file to connect to database
  */
 class DB_CONNECT {
-  var $myconn;
+  //constructor
+  function __construct() { 
+    $this -> connect();
+  }
 
-  /**
-   * Function to connect with database
-   */
+  //destruct
+  function __destruct() {
+    $this -> close();
+  }
+
   function connect() {
-    // import database connection variables
-    require_once __DIR__ . '/dbconfig.php';
+    $filepath = realpath(dirname(__FILE__));
+    require_once($filepath."/dbconfig.php");
 
-    // Connecting to mysql database
-    $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE) or die(mysqli_error($con));
-    $this->myconn = $con;
-
-    // returing connection cursor
-    return $this->myconn;
+    // connect to the mysql phpmyadmin database
+    $con = mysqli_connect('DB_SERVER', 'DB_USER', 'DB_PASSWORD') or die(mysql_error());
+    
+    // select database 
+    $db = mysql_select_db('DB_DATABASE') or die(mysql_error());
+    
+    //returning the curent cursor
+    return $con
   }
 
   /**
@@ -26,9 +33,7 @@ class DB_CONNECT {
    */
   function close() {
     // closing db connection
-    mysqli_close($myconn);
+    mysqli_close();
   }
-
 }
-
 ?>
