@@ -2,7 +2,8 @@
 
 	$response = array();
 	if (isset($_GET['moisture'])) {
-		$moisture = $_GET('moisture');		// get value 
+		$moisture = $_GET['moisture'];		// get value 	
+		echo $moisture;
 
 		// include db_connect
 		$filepath = realpath(dirname(__FILE__));
@@ -18,8 +19,11 @@
 			$response['success'] = 1;
 			$response['message'] = "success";
 
-			echo json_encode($response);
+			echo $response;
 		}
-	}
+		else {
+			echo 'No connection to DB';
+		}
+	}	
 	
 ?>
