@@ -15,10 +15,11 @@
 		// SQL query to insert data to table 
 		if ($db->connect()) {
 			$query_str = "INSERT INTO test (Moisture) VALUES (420)";
-
+			$qresult = $db->query(query_str);
+			
 			if (false === $qresult) {
 			  printf("error");
-			}
+			}	
 			else {
 			  echo 'done.';
 			}
