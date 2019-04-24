@@ -5,7 +5,7 @@
  */
 	class DB_CONNECT {
 
-		private $this->conn;    // store the connection 
+		private $conn;    // store the connection 
 
 		// establish connection to the database and return it 
 		function connect() {
@@ -14,7 +14,6 @@
 
 			// connect to the mysql database
 			$this->conn = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-
 			// Check connection
 			if (mysqli_connect_errno())
 			{
@@ -31,10 +30,11 @@
 			return $qresult;
 		}
 
-		// disconnect from the database 
+		// disconnect from the database
 		function close() {
 			// closing db connection
 			mysqli_close($this->conn);
 		}
 	}
+
 ?>

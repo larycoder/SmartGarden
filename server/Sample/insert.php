@@ -11,19 +11,19 @@
 
 		// establish connection to db
 		$db = new DB_CONNECT();
-		
+
 		// SQL query to insert data to table 
 		if ($db->connect()) {
-			$query_str = "INSERT INTO test (Moisture) VALUES (420)";
-			$qresult = $db->query(query_str);
-			
+			$query_str = "INSERT INTO test (Moisture) VALUES ($moisture)";
+			$qresult = $db->query($query_str);
+
 			if (false === $qresult) {
 			  printf("error");
-			}	
+			}
 			else {
 			  echo 'done.';
 			}
 		}
-	}	
-	
+	}
 ?>
+
