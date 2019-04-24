@@ -8,22 +8,9 @@ ser.baudrate = 9600
 
 # Get data from Arduino
 data = ser.readline()
-moisture = data 
+moisture = {'moisture_analog': data} 
 
 addr = 'http://localhost/insert.php'
 
-def meter():
-    while True:
-        requette = {'moisture': '+moisture+'}
-        try:
-            res = requests.post(addr, data=requette)
-            print(res.text)
-        except:
-            print ("connection failed")
-        break
-
-#sleep for desired amount of time
-if __name__ == "__main__":
-        while True:
-            meter()
-            time.sleep(30)
+req = requests.get( 'http://localhost/insert.php', params=moisture)
+print( req.url)
