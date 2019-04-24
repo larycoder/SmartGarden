@@ -3,9 +3,10 @@ import requests
 import time 
 
 # Connection
-ser = serial.Serial("/dev/ttyACM0")
-ser.baudrate = 9600 
-
+ser = serial.Serial(
+    port = '/dev/ttyACM0', 
+    baudrate = 9600 
+)
 # Get data from Arduino
 data = ser.readline()
 moisture = {'moisture_analog': data} 
