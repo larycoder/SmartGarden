@@ -1,6 +1,6 @@
 CREATE TABLE Sensors_Type (
 	Type_ID INT NOT NULL ,
-	Type_Name TEXT,
+	Type_Name VARCHAR(255),
 	PRIMARY KEY (Type_ID)
 );
 
