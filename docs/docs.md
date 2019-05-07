@@ -143,6 +143,15 @@ This soil moisture arduino sensor uses the two probes to pass current through th
 	* 300~700: humid soil
 	* 700~950: in water 
 
+**Schematic**
+  \begin{figure}
+  \centering
+  {\includegraphics[width=5in]{analogschematic.png}}
+  \caption{Schematic}
+  \end{figure}
+
+\newpage{}
+
 **Connection**
   \begin{figure}
   \centering
@@ -164,6 +173,7 @@ This soil moisture arduino sensor uses the two probes to pass current through th
   * 300~700 - humid soil
   * 700~950 - in water
 
+\newpage{}
 **Sample Code**
 \
 Our Sample Code can be found [**here**](https://github.com/huyhoang8398/SmartGarden/blob/master/Analog_Soil_Moisture_Sensor_SKU_SEN0114/SampleCode/SampleCode.ino)
