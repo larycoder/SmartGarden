@@ -1,4 +1,5 @@
 # Analog Soil Moisture Sensor - SKU_SEN0114
+
 ![](pics/SEN0114.jpg)
 
 ## Specification 
@@ -22,9 +23,9 @@
 
 ## Requirements
 
-* Hardware 
-	* Arduino Uno
-	* Analog Soil Moisture Sensor
-* Software 
-	* Arduino IDE
+* Hardware:
+  - Arduino Uno.
+	* Analog Soil Moisture Sensor.
+* Software:
+	* Arduino IDE.
 
