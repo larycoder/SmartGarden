@@ -185,7 +185,22 @@ Our Sample Code can be found [**here**](https://github.com/huyhoang8398/SmartGar
   \caption{Database}
   \end{figure}
 
+**Note:** This database architecture was built up on our current knowledge of the system. It may change in the future due to practical usage
+
+In the Database, It contains 4 table which is Sensors_Type, Sensor_List, Individual_Sensor, and Data table.
+\
+We created Sensor_Type table to classify different sensor like (Moisture, Heat, accelerator,..) with their own ID.
+\
+The table Sensor_List contains all the Sensor ID, e.g: SKU_SEN0114 - stand for Analog Soil Moisture Sensor. 
+\
+The table Individual_Sensor contains all the sensors and each sensor have its own index value and also their location.
+\
+The table Data contains value and the time that we read that value from sensor. 
+
 ## IV. Server 
+On the server side we use a small cronjob to automatically run the php script to receive data from client and update to the database.
+\
+We would have a website to display the graph of the data.
   \begin{figure}
   \centering
   {\includegraphics[width=6.7in]{/home/huyhoang8398/SmartGarden/docs/graph.png}}
