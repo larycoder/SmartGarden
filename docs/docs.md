@@ -96,7 +96,7 @@ value and soil moisture.
 
   \begin{figure}
   \centering
-  {\includegraphics[width=2.4in]{/home/huyhoang8398/SmartGarden/docs/SEN0193-test.png}}
+  {\includegraphics[width=2.4in]{/Users/huyhoang8398/SmartGarden/docs/SEN0193-test.png}}
   \caption{Calibration Range}
   \end{figure}
 * The final output value is affected by probe insertion depth and how tight the soil packed around it is.
@@ -114,7 +114,7 @@ Our Sample Code can be found [**here**](https://github.com/huyhoang8398/SmartGar
 ### B. Analog Soil Moisture Sensor - SKU_SEN0114
   \begin{figure}
   \centering
-  {\includegraphics[width=2.7in]{/home/huyhoang8398/SmartGarden/docs/IMGP5217.jpg}}
+  {\includegraphics[width=2.7in]{/Users/huyhoang8398/SmartGarden/docs/IMGP5217.jpg}}
   \caption{Analog Soil Moisture Sensor}
   \end{figure}
 
@@ -155,7 +155,7 @@ This soil moisture arduino sensor uses the two probes to pass current through th
 **Connection**
   \begin{figure}
   \centering
-  {\includegraphics[width=2.3in]{/home/huyhoang8398/SmartGarden/docs/SEN0114_Dia.png}}
+  {\includegraphics[width=2.3in]{/Users/huyhoang8398/SmartGarden/docs/SEN0114_Dia.png}}
   \caption{Connection Example with Arduino Uno}
   \end{figure}
 
@@ -178,10 +178,67 @@ This soil moisture arduino sensor uses the two probes to pass current through th
 \
 Our Sample Code can be found [**here**](https://github.com/huyhoang8398/SmartGarden/blob/master/Analog_Soil_Moisture_Sensor_SKU_SEN0114/SampleCode/SampleCode.ino)
 
-## III. Database
+## III. LoRa
+
+**Introduction**
+\
+The term LoRa stands for Long Range. It is a wireless Radio frequency technology introduced by a company called Semtech. This LoRa technology can be used to transmit bi-directional information to long distance without consuming much power. This property can be used by remote sensors which have to transmit its data by just operating on a small battery.
+Typically Lora can achieve a distance of 15-20km and can work on battery for years. 
+
+**Connecting Raspberry Pi with LoRa**
+\
+Lora module communicates using SPI on 3.3V Logic. The Raspberry pi also operates in 3.3V logic level and also has in-built SPI port and 3.3V regulator. So we can directly connect the LoRa module with the Raspberry Pi. The connection table is shown below
+
+| Raspberry Pi | Lora Module  |
+|--------------|--------------|
+| 3.3V         | 3.3V         |
+| Ground       | Ground       |
+| GPIO 10      | MOSI         |
+| GPIO 9       | MISO         |
+| GPIO 11      | SCK          |
+| GPIO 8       | Nss / Enable |
+| GPIO 4       | DIO 0        |
+| GPIO 17      | DIO 1        |
+| GPIO 18      | DIO 2        |
+| GPIO 27      | DIO 3        |
+| GPIO 22      | RST          |
+
+You can also use the circuit diagram below for reference. 
+\newpage{}
+
   \begin{figure}
   \centering
-  {\includegraphics[width=5in]{/home/huyhoang8398/SmartGarden/docs/db.png}}
+  {\includegraphics[width=3.2in]{/Users/huyhoang8398/SmartGarden/docs/Circuit-Diagram-for-Connecting-Raspberry-Pi-with-LoRa.png}}
+  \caption{Connecting Raspberry Pi with LoRa}
+  \end{figure}
+
+**Connecting Arduino with LoRa**
+\
+Transmitting Side- Connecting LoRa with Arduino UNO
+For the transmitting side we will use an Arduino UNO with our LoRa module. The circuit diagram to connect the Arduino UNO with LoRa is shown below. The module operates in 3.3V and hence the 3.3V pin on LoRa is connected to the 3.3v pin on the Arduino UNO board. 
+\
+  \begin{figure}
+  \centering
+  {\includegraphics[width=3.2in]{/Users/huyhoang8398/SmartGarden/docs/Circuit-Diagram-for-Connect-Arduino-Lora.png}}
+  \caption{Connecting Arduino with LoRa}
+  \end{figure}
+
+\newpage{}
+
+| LoRa SX1278 Module | Arduino UNO Board |
+|--------------------|-------------------|
+| 3.3V               | 3.3V              |
+| Gnd                | Gnd               |
+| En/Nss             | D10               |
+| G0/DIO0            | D2                |
+| SCK                | D13               |
+| MISO               | D12               |
+| MOSI               | D11               |
+| RST                | D9                |
+## IV. Database
+  \begin{figure}
+  \centering
+  {\includegraphics[width=5in]{/Users/huyhoang8398/SmartGarden/docs/db.png}}
   \caption{Database}
   \end{figure}
 
@@ -197,16 +254,16 @@ The table Individual_Sensor contains all the sensors and each sensor have its ow
 \
 The table Data contains value and the time that we read that value from sensor. 
 
-## IV. Server 
+## V. Server 
 On the server side we use a small cronjob to automatically run the php script to receive data from client and update to the database.
 \
 We would have a website to display the graph of the data.
   \begin{figure}
   \centering
-  {\includegraphics[width=6.7in]{/home/huyhoang8398/SmartGarden/docs/graph.png}}
+  {\includegraphics[width=6.7in]{/Users/huyhoang8398/SmartGarden/docs/graph.png}}
   \caption{Data Visualization}
   \end{figure}
 
-## V. Client 
+## VI. Client 
 
 We have a small python script and It is controlled by a cron job. Basically It will read the directly output from the arduino and send back to the server by using HTTP GET request.
