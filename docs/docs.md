@@ -254,7 +254,15 @@ The table Individual_Sensor contains all the sensors and each sensor have its ow
 \
 The table Data contains value and the time that we read that value from sensor. 
 
-## V. Server 
+## V. HTTP Method
+  \begin{figure}
+  \centering
+  {\includegraphics[width=5in]{/Users/huyhoang8398/SmartGarden/docs/htppConnection.png}}
+  \caption{Demo Connection Using Raspberry Pi and Arduino Uno}
+  \end{figure}
+
+
+### A. Server 
 On the server side we use a small cronjob to automatically run the php script to receive data from client and update to the database.
 \
 We would have a website to display the graph of the data.
@@ -264,6 +272,8 @@ We would have a website to display the graph of the data.
   \caption{Data Visualization}
   \end{figure}
 
-## VI. Client 
+### B. Client 
 
 We have a small python script and It is controlled by a cron job. Basically It will read the directly output from the arduino and send back to the server by using HTTP GET request.
+
+## VI. Lora 
