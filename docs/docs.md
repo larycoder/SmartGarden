@@ -235,6 +235,7 @@ For the transmitting side we will use an Arduino UNO with our LoRa module. The c
 | MISO               | D12               |
 | MOSI               | D11               |
 | RST                | D9                |
+
 ## IV. Database
   \begin{figure}
   \centering
@@ -261,6 +262,26 @@ The table Data contains value and the time that we read that value from sensor.
   \caption{Demo Connection Using Raspberry Pi and Arduino Uno}
   \end{figure}
 
+Reads the value from the specified analog pin. Arduino boards contain a multichannel, 10-bit analog to digital converter. This means that it will map input voltages between 0 and the operating voltage(5V or 3.3V) into integer values between 0 and 1023. On an Arduino UNO, for example, this yields a resolution between readings of: 5 volts / 1024 units or, 0.0049 volts (4.9 mV) per unit. See the table below for the usable pins, operating voltage and maximum resolution for some Arduino boards. [**1**](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/)
+\
+```c
+analogRead(pin)
+```
+\
+**NOTE:** On ATmega based boards (UNO, Nano, Mini, Mega), it takes about 100 microseconds (0.0001 s) to read an analog input, so the maximum reading rate is about 10,000 times a second.
+\
+We use an simple library called pySerial  and Raspberry Pi  for reading data from Arduino. 
+\
+```python
+# Connection
+import serial
+ser = serial.Serial(
+    port = '/dev/ttyUSB0', 
+    baudrate = 9600 
+)
+# Get data from Arduino
+data = ser.readline()
+```
 
 ### A. Server 
 On the server side we use a small cronjob to automatically run the php script to receive data from client and update to the database.
@@ -277,3 +298,9 @@ We would have a website to display the graph of the data.
 We have a small python script and It is controlled by a cron job. Basically It will read the directly output from the arduino and send back to the server by using HTTP GET request.
 
 ## VI. Lora 
+
+  \begin{figure}
+  \centering
+  {\includegraphics[width=6.5in]{/Users/huyhoang8398/SmartGarden/docs/DefaultConnectionLora_bb.png}}
+  \caption{Demo Connection Using Raspberry Pi and Arduino Uno with LoRa}
+  \end{figure}
