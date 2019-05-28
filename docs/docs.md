@@ -304,3 +304,60 @@ We have a small python script and It is controlled by a cron job. Basically It w
   {\includegraphics[width=6.5in]{/Users/huyhoang8398/SmartGarden/docs/DefaultConnectionLora_bb.png}}
   \caption{Demo Connection Using Raspberry Pi and Arduino Uno with LoRa}
   \end{figure}
+
+## VII. Zigbee
+
+  \begin{figure}
+  \centering
+  {\includegraphics[width=6in]{/Users/huyhoang8398/SmartGarden/docs/zigbee.png}}
+  \caption{RF Zigbee UART CC2530 }
+  \end{figure}
+
+
+**USB UART CP2102**
+This USB converter is using CP2102 from **Silicon labs** which is used to transfer USB to UART TTL and vice versa.
+
+\
+USB UART CP2102 switch can be used on all Windows, Mac, Linux, Android.
+Support transmission speeds such as 300, 600, 1200, 1800, 2400, 4000, 4800, 7200, 9600, 14400, 16000, 19200, 28800, 38400, 51200, 56000, 57600, 64000, 76800, 115200, 128,000, 153,600, 230,400, 250,000, 256,000, 460,800, 500,000, 576,000, 921,600 and other kinds of speeds.
+\
+To use this adapter, we need to install an driver from  [**Silicon Labs**](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
+\
+To use this adapter and zigbee cc2530: 
+
+\newpage{}
+
+| USB UART CP2102 | Zigbee cc2530 |
+|-----------------|---------------|
+| 5V              | 5V            |
+| GND             | GND           |
+| Rx              | Tx            |
+| Tx              | Rx            |
+
+**Introduction**
+
+Zigbee UART CC2530 V1 RF transceiver circuit uses CC2530 IC from TI, pre-programmed firmware to be easily used as a Zigbee standard wireless data transfer module with UART interface that is easy to connect with micro controller or computer (via USB-UART transfer cable) with only a few config steps using the push button.
+
+**Specification**
+
+* Power supply: 3 - 5.5VDC
+* Current: < 30mA.
+* Standard Zigbee 2.4Ghz wave transmission.
+* Maximum transmission speed: 3300bps.
+* Transmission capacity: 4.5dbm.
+* Distance: 250m.
+* UART TTL protocol connection (3.3VDC or 5VDC), maximum Baudrate 115200.
+* Size: 15.5x31.5mm.
+
+**Connecting Arduino with LoRa**
+
+| Arduino Uno | Zigbee cc2530 |
+|-------------|---------------|
+| 5V          | 5V            |
+| GND         | GND           |
+| Rx          | Tx            |
+| Tx          | Rx            |
+
+**Connecting Arduino with Raspberry Pi**
+
+We use a UART-to-USB adapter to connect the zigbee module to our Pi because the UART pins on it are used for the Lora module.
