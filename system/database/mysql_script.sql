@@ -14,7 +14,7 @@ CREATE TABLE Sensor_List (
 CREATE TABLE Individual_Sensor (
 	Sensor_Index INT NOT NULL AUTO_INCREMENT,
 	Sensor_ID VARCHAR(255) NOT NULL,
-	Coordinate INT NOT NULL,
+	Position VARCHAR(255) NOT NULL,
 	PRIMARY KEY (Sensor_Index)
 );
 
