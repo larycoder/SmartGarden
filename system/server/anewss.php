@@ -18,7 +18,7 @@
 			$qresult = $db->query($query_str);
 
 			if (false === $qresult) {
-			  echo 'Error';
+			  echo $db->error();
 			}
 			else {
 			  echo 'Done.';
