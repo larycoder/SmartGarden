@@ -2,9 +2,9 @@
 	$response = array();
 	if (isset($_GET)) {
 		$Sensor_Index = $_GET['ss_index'];
-		$Value = $_GET['val'];	
+		$Sensor_Reading = $_GET['val'];	
 		echo $Sensor_Index;
-		echo $Value;
+		echo $Sensor_Reading;
 		
 		// include db_connect
 		$filepath = realpath(dirname(__FILE__));
@@ -15,7 +15,7 @@
 
 		// SQL query to insert data to table 
 		if ($db->connect()) {
-			$query_str = "INSERT INTO Data (Sensor_Index, Value) VALUES ($Sensor_Index, $Value)";
+			$query_str = "INSERT INTO Data (Sensor_Index, Sensor_Reading) VALUES ($Sensor_Index, $Sensor_Reading)";
 			$qresult = $db->query($query_str);
 
 			if (false === $qresult) {
