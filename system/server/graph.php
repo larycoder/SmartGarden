@@ -73,7 +73,7 @@ foreach ($sensor_arr as $item) {
         $result = $db->query($query_str);
 		$chart = [];
         while ($row = $result->fetch_assoc() ) {
-            $query_str = "select distinct Data.Time as x, Data.Value as y from Individual_Sensor, Data
+            $query_str = "select distinct Data.Time as x, Data.Sensor_Reading as y from Individual_Sensor, Data
 				where Individual_Sensor.Sensor_ID = '" . $item . "' and Data.Sensor_Index = " . $row["Sensor_Index"] . " and Individual_Sensor.Sensor_Index = Data.Sensor_Index
 				order by Individual_Sensor.Sensor_Index asc";
             $result2 = $db->query($query_str);
