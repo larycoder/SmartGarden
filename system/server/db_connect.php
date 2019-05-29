@@ -30,6 +30,12 @@
 			return $qresult;
 		}
 
+		// return error description of the last call
+		function error(){
+			$qerror = mysqli_error($this->conn);
+			return $qerror;
+		}
+
 		// disconnect from the database
 		function close() {
 			// closing db connection
