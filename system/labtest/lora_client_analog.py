@@ -4,6 +4,7 @@ import os
 import time
 import array
 import lib as pyrfm
+import serial
 
 # read data from zigbee 
 ser = serial.Serial(port='/dev/ttyUSB0', baudrate=115200)
@@ -40,7 +41,6 @@ if ll.setOpModeSleep(True,True):
     ll.setPreambleLength(8)
     ll.setFrequency(868)
     ll.setTxPower(13)
-    # f = open("analog.txt", "r")
-    # aMoisture= f.read() 
-    ll.sendStr(aMoisture)
+
+    ll.sendStr(dataLora)
     ll.waitPacketSent()

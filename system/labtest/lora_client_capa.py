@@ -4,6 +4,7 @@ import sys
 import os
 import time
 import array
+import serial
 
 ser = serial.Serial(port='/dev/ttyUSB0', baudrate=115200)
 ser.write('D')
@@ -41,8 +42,6 @@ if ll.setOpModeSleep(True,True):
     ll.setModemConfig('Bw125Cr45Sf128');
     ll.setPreambleLength(8)
     ll.setFrequency(868)
-    ll.setTxPower(13)
-    # f = open("capa.txt", "r")
-    # cMoisture = f.read() 
-    ll.sendStr(cMoisture)
+    ll.setTxPower(13) 
+    ll.sendStr(dataLora)
     ll.waitPacketSent()
