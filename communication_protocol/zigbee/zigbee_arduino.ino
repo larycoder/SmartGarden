@@ -75,6 +75,4 @@ void loop() {
       Serial.print(soilMoistureValue);
       Serial.print("\r");
     }
-    
-    
 }
