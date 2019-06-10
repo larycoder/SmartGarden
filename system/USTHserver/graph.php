@@ -3,35 +3,75 @@
   box-sizing: border-box;
 }
 
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
+body {
+  margin: 0;
+  font-family: Arial;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+.header {
+  text-align: center;
+  padding: 32px;
 }
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
 </style>
+
 
 <h2> USTH Smart Green Garden</h2>
 
 <div class="row">
-  <div class="column" > 
-            <img src="images/system.png" alt="System Overall">
+  <div class="column" >
+            <img src="images/system.png" alt="System Overall" style="width:100%">
   </div>
-  <div class="column" > 
-            <img src="images/protocol.png" alt="Protocol"> 
+  <div class="column" >
+            <img src="images/protocol.png" alt="Protocol" style="width:100%">
+  </div>
+  <div class="column" >
+            <img src="images/IMG_3293.png" alt= "Demo" style="width:100%">
   </div>
 </div>
 <br/></br><br/><br/>
 
-<div id="chartContainer1" style="height: 400px; width: 100%;"></div>
+#<div id="chartContainer1" style="height: 400px; width: 100%;"></div>
 <br/><br/><br/><br/>
 <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
 <br/><br/><br/><br/>
