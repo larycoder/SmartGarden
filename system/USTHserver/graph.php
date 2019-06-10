@@ -23,8 +23,10 @@
 
 <div class="row">
   <div class="column" > 
+            <img src="images/system.png" alt="System Overall">
   </div>
   <div class="column" > 
+            <img src="images/protocol.png" alt="Protocol"> 
   </div>
 </div>
 <br/></br><br/><br/>
