@@ -1,3 +1,34 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<h2> USTH Smart Green Garden</h2>
+
+<div class="row">
+  <div class="column" > 
+  </div>
+  <div class="column" > 
+  </div>
+</div>
+<br/></br><br/><br/>
+
 <div id="chartContainer1" style="height: 400px; width: 100%;"></div>
 <br/><br/><br/><br/>
 <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
@@ -84,11 +115,12 @@ foreach ($sensor_arr as $item) {
             }
             $chart[] = ['index' => $row["Sensor_Index"], 'chart' => $new_array];
         }
-        if ($item == 'SEN0169') {
-            echo '<script type="text/javascript">
-                            chart("chartContainer1", ' . json_encode($chart) . ', "SEN0169");
-					</script>';
-        } else if ($item == 'SEN0114') {
+        #if ($item == 'SEN0169') {
+        #    echo '<script type="text/javascript">
+        #                    chart("chartContainer1", ' . json_encode($chart) . ', "SEN0169");
+        #				</script>';
+        #}
+        if ($item == 'SEN0114') {
             echo '<script type="text/javascript">
 								chart("chartContainer2", ' . json_encode($chart) . ',"SEN0114");
 						</script>';
