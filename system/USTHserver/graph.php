@@ -1,81 +1,127 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-* {
-  box-sizing: border-box;
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
 }
-
-body {
-  margin: 0;
-  font-family: Arial;
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
 }
-
-.header {
-  text-align: center;
-  padding: 32px;
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
 }
-
-.row {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-  padding: 0 4px;
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
-
-/* Create four equal columns that sits next to each other */
-.column {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
   width: 100%;
+  text-align: center;
 }
-
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .column {
-    -ms-flex: 50%;
-    flex: 50%;
-    max-width: 50%;
-  }
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
 }
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    -ms-flex: 100%;
-    flex: 100%;
-    max-width: 100%;
-  }
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
 }
-
+.active, .dot:hover {
+  background-color: #717171;
+}
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
 </style>
 
+<div class="slideshow-container">
 
-<h2> USTH Smart Green Garden</h2>
-
-<div class="row">
-  <div class="column" >
-            <img src="images/system.png" alt="System Overall" style="width:100%">
-  </div>
-  <div class="column" >
-            <img src="images/protocol.png" alt="Protocol" style="width:100%">
-  </div>
-  <div class="column" >
-            <img src="images/IMG_3293.png" alt= "Demo" style="width:100%">
-  </div>
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="https://scontent.fhan3-3.fna.fbcdn.net/v/t1.0-9/64582215_1213018805526536_6302720243223494656_n.jpg?_nc_cat=106&_nc_oc=AQmt_FEdwxY5yZCOIH4r603b4qFFUqsrtZ36A9UrZFFdtLYxS_J_3pnawmx5GpACI6o&_nc_ht=scontent.fhan3-3.fna&oh=47f21c8a4e9f2230c398698b1b58237e&oe=5D9AF666" style="width:100%">
 </div>
-<br/></br><br/><br/>
 
-#<div id="chartContainer1" style="height: 400px; width: 100%;"></div>
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="img_snow_wide.jpg" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="img_mountains_wide.jpg" style="width:100%">
+</div>
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+
+
+<div id="chartContainer1" style="height: 500px; width: 100%;"></div>
 <br/><br/><br/><br/>
-<div id="chartContainer2" style="height: 400px; width: 100%;"></div>
+<div id="chartContainer2" style="height: 500px; width: 100%;"></div>
 <br/><br/><br/><br/>
-<div id="chartContainer3" style="height: 400px; width: 100%;"></div>
+<div id="chartContainer3" style="height: 500px; width: 100%;"></div>
  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
  <script>
 function chart(chartId = "chartContainer1", _data, nameChart) {
@@ -88,12 +134,11 @@ points = [];
 	label : i['x'],
 	y : parseInt(i['y'])
 	});
-});
 points.push({
 	type: "spline",
 		name: entry['index'],
-		showInLegend: true,
 	dataPoints : new_arr
+});
 });
 });
 console.log(points)
@@ -127,6 +172,31 @@ function toggleDataSeries(e) {
 	}
 	chart.render();
 }
+
+var slideIndex = 1;
+showSlides(slideIndex);
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+
 </script>
 <?php
 //select individual_sensor.Sensor_Index from individual_sensor where individual_sensor.Sensor_ID = 'SEN0169'
@@ -139,41 +209,65 @@ require_once $filepath . "/db_connect.php";
 // establish connection to db
 $db = new DB_CONNECT();
 
-foreach ($sensor_arr as $item) {
-    // SQL query to insert Data to table
     if ($db->connect()) {
-        $query_str = "select Individual_Sensor.Sensor_Index from Individual_Sensor where Individual_Sensor.Sensor_ID = '" . $item . "'";
-        $result = $db->query($query_str);
-		$chart = [];
-        while ($row = $result->fetch_assoc() ) {
-            $query_str = "select distinct Data.Time as x, Data.Sensor_Reading as y from Individual_Sensor, Data
-				where Individual_Sensor.Sensor_ID = '" . $item . "' and Data.Sensor_Index = " . $row["Sensor_Index"] . " and Individual_Sensor.Sensor_Index = Data.Sensor_Index
-				order by Individual_Sensor.Sensor_Index asc";
+$row = [1, 2, 3, 4];
+        foreach ($row as $index) {
+            $query_str = "select distinct Data.Time as x, Data.Sensor_Reading as y from Data
+				where Data.Sensor_Reading < 1000 and  Data.Sensor_Index = " . $index;
             $result2 = $db->query($query_str);
             $new_array = [];
             while ($row2 = $result2->fetch_assoc()) {
                 $n = $row2['y'];
                 $new_array[] = $row2;
             }
-            $chart[] = ['index' => $row["Sensor_Index"], 'chart' => $new_array];
+            $chart[] = ['index' =>$index, 'chart' => $new_array];
         }
-        #if ($item == 'SEN0169') {
-        #    echo '<script type="text/javascript">
-        #                    chart("chartContainer1", ' . json_encode($chart) . ', "SEN0169");
-        #				</script>';
-        #}
-        if ($item == 'SEN0114') {
             echo '<script type="text/javascript">
-								chart("chartContainer2", ' . json_encode($chart) . ',"SEN0114");
-						</script>';
-        } else if ($item == 'SEN0193') {
-            echo '<script type="text/javascript">
-									chart("chartContainer3", ' . json_encode($chart) . ', "SEN0193");
-							1</script>';
-        }
-    }
-}
+                            chart("chartContainer1", ' . json_encode($chart) . ', "Filter 1 ");
+					</script>';
+
+					//===========================================================
+					$chart = [];
+					$row = [5, 6, 7, 8];
+					foreach ($row as $index) {
+						$query_str = "select distinct Data.Time as x, Data.Sensor_Reading as y from Data
+							where Data.Sensor_Reading < 1000 and  Data.Sensor_Index = " . $index;
+						$result2 = $db->query($query_str);
+						$new_array = [];
+						while ($row2 = $result2->fetch_assoc()) {
+							$n = $row2['y'];
+							$new_array[] = $row2;
+						}
+						$chart[] = ['index' =>$index, 'chart' => $new_array];
+					}
+						echo '<script type="text/javascript">
+										chart("chartContainer2", ' . json_encode($chart) . ', "Filter 2");
+								</script>';
+
+					//===========================================================
+
+					$chart = [];
+					$row = [9, 10, 11, 12];
+					foreach ($row as $index) {
+						$query_str = "select distinct Data.Time as x, Data.Sensor_Reading as y from Data
+							where Data.Sensor_Reading < 1000 and  Data.Sensor_Index = " . $index;
+						$result2 = $db->query($query_str);
+						$new_array = [];
+						while ($row2 = $result2->fetch_assoc()) {
+							$n = $row2['y'];
+							$new_array[] = $row2;
+						}
+						$chart[] = ['index' =>$index, 'chart' => $new_array];
+					}
+						echo '<script type="text/javascript">
+										chart("chartContainer3", ' . json_encode($chart) . ', "Filter 3");
+								</script>';
+
+	}
+	
+
 $db->close();
 
 ?>
+
 
