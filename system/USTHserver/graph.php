@@ -134,11 +134,12 @@ points = [];
 	label : i['x'],
 	y : parseInt(i['y'])
 	});
+});
+
 points.push({
 	type: "spline",
 		name: entry['index'],
 	dataPoints : new_arr
-});
 });
 });
 console.log(points)
