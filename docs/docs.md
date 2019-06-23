@@ -112,6 +112,7 @@ Our Sample Code can be found [**here**](https://github.com/huyhoang8398/SmartGar
 \newpage{}
 
 ### B. Analog Soil Moisture Sensor - SKU_SEN0114
+
   \begin{figure}
   \centering
   {\includegraphics[width=2.7in]{/Users/huyhoang8398/SmartGarden/docs/IMGP5217.jpg}}
@@ -256,6 +257,7 @@ The table Individual_Sensor contains all the sensors and each sensor have its ow
 The table Data contains value and the time that we read that value from sensor. 
 
 ## V. HTTP Method
+
   \begin{figure}
   \centering
   {\includegraphics[width=5in]{/Users/huyhoang8398/SmartGarden/docs/htppConnection.png}}
@@ -284,6 +286,7 @@ data = ser.readline()
 ```
 
 ### A. Server 
+
 On the server side we use a small cronjob to automatically run the php script to receive data from client and update to the database.
 \
 We would have a website to display the graph of the data.
@@ -297,15 +300,48 @@ We would have a website to display the graph of the data.
 
 We have a small python script and It is controlled by a cron job. Basically It will read the directly output from the arduino and send back to the server by using HTTP GET request.
 
-## VI. Lora 
+## VI. Communication Protocol
 
-  \begin{figure}
-  \centering
-  {\includegraphics[width=6.5in]{/Users/huyhoang8398/SmartGarden/docs/DefaultConnectionLora_bb.png}}
-  \caption{Demo Connection Using Raspberry Pi and Arduino Uno with LoRa}
-  \end{figure}
+### A. Lora 
 
-## VII. Zigbee
+\begin{figure}
+\centering
+    {\includegraphics[width=5in]{/Users/huyhoang8398/SmartGarden/docs/cover.jpg}}
+    \caption{Grove LoRa Radio}
+\end{figure}
+
+\
+
+\begin{figure}
+\centering
+    {\includegraphics[width=6.5in]{/Users/huyhoang8398/SmartGarden/docs/DefaultConnectionLora_bb.png}}
+\caption{Demo Connection Using Raspberry Pi and Arduino Uno with LoRa}
+\end{figure}
+
+\
+We are using a Lora module which is provided from Seeed Studio company. The main functional module in Grove - LoRa Radio 433MHz is RFM98, which is a transceiver features the LoRa long range modem that provides ultra-long range spread spectrum communication and high interference immunity whilst mini-missing current consumption. The heart of Grove - LoRa Radio 433MHz is ATmega168, a widely used chip with very high-performance and low power consumption, especially suitable for this grove module.
+This is the 868MHz version, which can be used for 868MHz communication.
+
+**Features**
+
+* Using RFM95 module based on SX1276 LoRa®
+* Working Voltage:5V/3.3V
+* ~28mA(Avg) @+20dBm continuous transmit
+* ~8.4mA(Avg)@standby mode
+* ~20mA(Avg) @receive mode, BW-500kHz
+* Working Temperature:-20 – 70℃
+* Interface:Grove - UART(RX,TX,VCC,GND)
+* Simple wire antenna or MHF Connector for external high gain antenna
+* Working Frequency:868MHz/433MHz
+* +20dBm 100 mW Power Output Capability
+* Size:20*40mm
+* Rate:0.3kps~50kps
+* Ready-to-go Arduino libraries
+* Resered MHF antenna connector
+
+From the official website, The Platforms Supported is only Arduino. To work with Raspberry Pi, we have to use an third-party library from [**here**](https://github.com/erazor83/pyRFM) 
+
+### B. Zigbee
 
   \begin{figure}
   \centering
@@ -324,8 +360,6 @@ Support transmission speeds such as 300, 600, 1200, 1800, 2400, 4000, 4800, 7200
 To use this adapter, we need to install an driver from  [**Silicon Labs**](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
 \
 To use this adapter and zigbee cc2530: 
-
-\newpage{}
 
 | USB UART CP2102 | Zigbee cc2530 |
 |-----------------|---------------|
@@ -351,13 +385,37 @@ Zigbee UART CC2530 V1 RF transceiver circuit uses CC2530 IC from TI, pre-program
 
 **Connecting Arduino with LoRa**
 
-| Arduino Uno | Zigbee cc2530 |
-|-------------|---------------|
-| 5V          | 5V            |
-| GND         | GND           |
-| Rx          | Tx            |
-| Tx          | Rx            |
+| Arduino Uno | Lora |
+|-------------|------|
+| 5V          | 5V   |
+| GND         | GND  |
+| Rx          | Tx   |
+| Tx          | Rx   |
 
 **Connecting Arduino with Raspberry Pi**
 
 We use a UART-to-USB adapter to connect the zigbee module to our Pi because the UART pins on it are used for the Lora module.
+
+## VII. System Overview
+
+\begin{figure}
+\centering
+    {\includegraphics[width=6in]{/Users/huyhoang8398/SmartGarden/docs/system.png}}
+    \caption{System Overview}
+\end{figure}
+
+Inside the garden, We are using twelve sensors total to measure the soil moisture data in each filter.
+We have three filters, and each filter has two more sub filters with two sensors. All sensors is connected together with an Arduino Mega. 
+\
+
+\begin{figure}
+\centering
+    {\includegraphics[width=6in]{/Users/huyhoang8398/SmartGarden/docs/protocol.png}}
+    \caption{System protocol overview}
+\end{figure}
+
+To transfer data, we use zigbee and LoRa module. Thus the Raspberry Pi cannot read directly the analog value from the sensor so we use an Arduino Mega to do that.
+And we put one Raspberry Pi ( which is attached with a Zigbee and Lora module ), the raspberry pi will send a request to the Arduino Mega ( which is also attached with a Zigbee module ) to receive the data from the sensor.
+We also setup a cronjob to schedule the time request for the data depend on the time the filters will be supply with wastewaters.
+\
+After received the data from the Arduino, The raspberry pi inside the garden will send these data to another Raspberry Pi which is inside the USTH Building by LoRa. And the data will be send to USTH server by HTTP protocol.
