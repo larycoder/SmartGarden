@@ -59,12 +59,12 @@ Nó tương thích với MCU điện áp thấp (cả mức 3,3V và 5V).
 
 Ví dụ, chúng ta có thể sử dụng Arduino để đọc giá trị trực tiếp từ cảm biến.
 
-**TÍNH NĂNG, ĐẶC ĐIỂM**
+**Tính năng, hỗ trợ**
 
 * Hỗ trợ kết nối tốt với arduino
 * Đầu ra analog
 
-**CÁC ỨNG DỤNG**
+**Các ứng dụng**
 
 * Làm vườn & canh tác
 * Phát hiện độ ẩm
