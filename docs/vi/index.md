@@ -74,7 +74,7 @@ Ví dụ, chúng ta có thể sử dụng Arduino để đọc giá trị trực
 
 * Điện áp hoạt động: 3,3 ~ 5,5 VDC
 * Điện áp đầu ra: 0 ~ 3.0VDC
-* Hiệu điện thế: 5mA
+* Cường độ dòng điện: 5mA
 * Giao tiếp: PH2.0-3P
 * Kích thước: 3,86 x 0,90 inch (L x W)
 * Trọng lượng: 15g
@@ -130,7 +130,7 @@ Vì vậy, chúng tôi khuyến nghị việc sử dụng cảm biến đổ ẩ
 
 * Nguồn điện: 3,3V ~ 5V
 * Tín hiệu điện áp đầu ra: 0 ~ 4.2V
-* Hiệu điện thế: 35mA
+* Cường độ dòng điện: 35mA
 * Định nghĩa pin:
   * Màu xanh dương: đầu ra tương tự
   * Đen: GND
