@@ -145,18 +145,114 @@ Vì vậy, chúng tôi khuyến nghị việc sử dụng cảm biến đổ ẩ
 
 ![Sơ đồ mạch của cảm biến với Arduino Uno](SEN0114_Dia.png) 
 
-| Aduino Uno    | Cảm biến độ ẩm đất điện trở |
+| Aduino Uno    | Cảm biến độ ẩm đất điện trở     |
 |---------------|---------------------------------|
 | GND           | GND ( Dây đen )                 |
 | 5V            | Dây Đỏ                          |
 | Tín hiệu ra   | Dây xanh                        |
 
+**Phạm vi hiệu chuẩn**
+
+* Phạm vi sẽ được chia thành ba phần: đất khô, đất ướt, trong nước. Giá trị liên quan của chúng là:
+  * 0 ~ 300 - đất khô
+  * 300 ~ 700 - đất ẩm
+  * 700 ~ 950 - trong nước
+
 **Chương trình mẫu**
 \
 Chương trình mẫu có thể tìm thấy tại [**đây**](https://github.com/huyhoang8398/SmartGarden/blob/master/Analog_Soil_Moisture_Sensor_SKU_SEN0114/SampleCode/SampleCode.ino)
 
+
+#### Mạch LoRa
+
+Công nghệ LoRa , được phát triển bởi Semtech , là một giao thức không dây mới được thiết kế để truyền thông tầm xa, năng lượng thấp. 
+Giao thức cung cấp loại khả năng liên lạc mà các thiết bị thông minh cần có, và Liên minh LoRa đang hoạt động để đảm bảo khả năng tương tác giữa nhiều mạng trên toàn quốc.
+
+Một phần của phổ LoRa sử dụng thể hiện ít nhiễu điện từ, do đó tín hiệu có thể kéo dài một khoảng cách xa, thậm chí đi qua các tòa nhà, với rất ít năng lượng. 
+Điều này phù hợp với các thiết bị IoT với dung lượng pin hạn chế. 
+Điều đó cũng có nghĩa là các tinh thể chi phí thấp hơn có thể được sử dụng, do đó, việc xây dựng LoRa thành các thiết bị rẻ hơn.
+
+Mỗi gateway LoRa có thể xử lý hàng triệu node. 
+Điều đó, cộng với thực tế là các tín hiệu có thể kéo dài khoảng cách đáng kể, có nghĩa là cần ít cơ sở hạ tầng mạng hơn, do đó làm cho việc xây dựng mạng LoRa rẻ hơn. 
+Các mạng LoRa có thể được đặt cùng với các thiết bị liên lạc khác, như các tháp điện thoại di động, làm giảm đáng kể các hạn chế xây dựng.
+
+Các tính năng khác của LoRa cũng khiến nó trở nên lý tưởng cho IoT. 
+LoRa sử dụng thuật toán tốc độ dữ liệu thích ứng để giúp tối đa hóa tuổi thọ pin và dung lượng mạng của thiết bị. 
+Các giao thức của nó bao gồm nhiều lớp mã hóa, ở cấp độ mạng, ứng dụng và thiết bị, cho phép liên lạc an toàn. 
+Tính hai chiều của giao thức hỗ trợ các thông điệp quảng bá, cho phép chức năng cập nhật phần mềm.
+
+Sự phát triển của Internet of Things bị giới hạn bởi dung lượng của mạng, bởi khả năng hoạt động của thiết bị mà không cần thay pin và bởi khả năng mã hóa truyền dẫn bí mật.
+Các tính năng được tích hợp trong LoRa cung cấp tất cả các khả năng này và sẽ cho phép sự phát triển rộng rãi của IoT. 
+Với công nghệ Lora, chúng ta có thể truyền dữ liệu với khoảng cách lên hàng km mà không cần các mạch khuếch đại công suất; từ đó giúp tiết kiệm năng lượng tiêu thụ khi truyền/nhận dữ liệu. 
+Do đó, LoRa có thể được áp dụng rộng rãi trong các ứng dụng thu thập dữ liệu như sensor network trong đó các sensor node có thể gửi giá trị đo đạc về trung tâm cách xa hàng km và có thể hoạt động với pin trong thời gian dài trước khi cần thay pin.
+
+**So sánh Lora cùng các công nghệ khác**
+Vì sao cần phải sử dụng công nghệ Lora ?
+Hiện nay, mọi người rất hào hứng với tất cả các khả năng do các cảm biến và thiết bị mới mang lại cho khối lượng dữ liệu hữu ích. 
+Nhưng chuyện gì sẽ xảy ra nếu những cảm biến này dừng đột ngột việc phát dữ liệu do hết pin ? 
+Pin sẽ cần phải được thay đổi cứ sau vài ngày hoặc vài tuần? Và 1 mạng sẽ xử lý lưu lượng dữ liệu lớn như thế nào?
+Rõ ràng, một trong những thách thức chính trong việc xây dựng Internet vạn vật là đảm bảo rằng tất cả những thứ đó trên thực tế có thể giao tiếp qua Internet. 
+Số lượng thiết bị IoT là số lượng lớn 25 tỷ thiết bị vào năm 2020, theo một ước tính, và bất kỳ mạng nào hỗ trợ giao tiếp đó phải mở rộng để xử lý lưu lượng. 
+Vì vậy, có những vấn đề đối với mạng và cũng có vấn đề với chính các thiết bị IoT: chúng chạy bằng nguồn pin, có sóng yếu và có bộ nhớ và khả năng xử lý hạn chế.
+Các thiết bị IoT ngày nay chọn từ một số công nghệ để hỗ trợ liên lạc của họ, nhưng không có thiết bị nào là lý tưởng. Wi-Fi có ở khắp mọi nơi, nhưng nó sử dụng nhiều năng lượng và truyền nhiều dữ liệu. 
+Đây không phải là một kết hợp hoàn hảo cho các thiết bị IoT không có năng lượng dự phòng và thường gửi dữ liệu hạn chế với số lượng nhỏ. 
+Và cũng có những hạn chế về số lượng thiết bị mà một bộ định tuyến Wi-Fi có thể xử lý và chúng có thể hết dung lượng khi số lượng thiết bị IoT trong nhà tăng lên.
+
+**Băng tần làm việc của LoRa từ 430MHz đến 915MHz cho từng khu vực khác nhau trên thế giới:**
+* 430MHz cho châu Á
+* 780MHz cho Trung Quốc
+* 433MHz hoặc 866MHz cho châu Âu
+* 915MHz cho USA
+
+**Giao tiếp Raspberry Pi với LoRa**
+\
+Mô-đun Lora giao tiếp bằng SPI trên Logic 3.3V. 
+Raspberry pi cũng hoạt động ở mức logic 3,3V và cũng có cổng SPI tích hợp và bộ điều chỉnh 3,3V. 
+Vì vậy, chúng ta có thể kết nối trực tiếp mô-đun LoRa với Raspberry Pi. Bảng kết nối được hiển thị dưới đây
+
+| Raspberry Pi | Lora Module  |
+|--------------|--------------|
+| 3.3V         | 3.3V         |
+| Ground       | Ground       |
+| GPIO 10      | MOSI         |
+| GPIO 9       | MISO         |
+| GPIO 11      | SCK          |
+| GPIO 8       | Nss / Enable |
+| GPIO 4       | DIO 0        |
+| GPIO 17      | DIO 1        |
+| GPIO 18      | DIO 2        |
+| GPIO 27      | DIO 3        |
+| GPIO 22      | RST          |
+
+Bạn cũng có thể sử dụng sơ đồ mạch dưới đây để tham khảo.
+
+![Sơ đồ mạch kết nối giữa LoRa và Rasp Pi]('./../Circuit-Diagram-for-Connecting-Raspberry-Pi-with-LoRa.png')
+
+**Kết nối Arduino với mạch LoRa**
+
+Bên truyền - Kết nối LoRa với Arduino UNO
+Đối với phía truyền phát, chúng tôi sẽ sử dụng Arduino UNO với mô-đun LoRa của chúng tôi. 
+Sơ đồ mạch để kết nối Arduino UNO với LoRa được hiển thị bên dưới. 
+Mô-đun hoạt động trong 3,3V và do đó chân 3,3V trên LoRa được kết nối với chân 3,3v trên bo mạch Arduino UNO.
+
+![Sơ đồ mạch kết nối giữa LoRa và Arduino Uno]('./../Circuit-Diagram-for-Connect-Arduino-Lora.png')
+
+| LoRa SX1278 Module | Arduino UNO Board |
+|--------------------|-------------------|
+| 3.3V               | 3.3V              |
+| Gnd                | Gnd               |
+| En/Nss             | D10               |
+| G0/DIO0            | D2                |
+| SCK                | D13               |
+| MISO               | D12               |
+| MOSI               | D11               |
+| RST                | D9                |
+
 ### Thiết kế cơ sở dữ liệu
 
+![Cơ sở dữ liệu](db.png)
+
+**Ghi chú** 
 
 
 ## XÂY DỰNG - CÀI ĐẶT HTTT QUẢN LÝ THỊ TRƯỜNG KHCN
