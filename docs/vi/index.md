@@ -162,6 +162,7 @@ Vì vậy, chúng tôi khuyến nghị việc sử dụng cảm biến đổ ẩ
 \
 Chương trình mẫu có thể tìm thấy tại [**đây**](https://github.com/huyhoang8398/SmartGarden/blob/master/Analog_Soil_Moisture_Sensor_SKU_SEN0114/SampleCode/SampleCode.ino)
 
+### Giao thức truyền thông
 
 #### Mạch LoRa
 
@@ -226,7 +227,7 @@ Vì vậy, chúng ta có thể kết nối trực tiếp mô-đun LoRa với Ras
 
 Bạn cũng có thể sử dụng sơ đồ mạch dưới đây để tham khảo.
 
-![Sơ đồ mạch kết nối giữa LoRa và Rasp Pi]('./../Circuit-Diagram-for-Connecting-Raspberry-Pi-with-LoRa.png')
+![Sơ đồ mạch kết nối giữa LoRa và Rasp Pi](Circuit-Diagram-for-Connecting-Raspberry-Pi-with-LoRa.png)
 
 **Kết nối Arduino với mạch LoRa**
 
@@ -235,7 +236,7 @@ Bên truyền - Kết nối LoRa với Arduino UNO
 Sơ đồ mạch để kết nối Arduino UNO với LoRa được hiển thị bên dưới. 
 Mô-đun hoạt động trong 3,3V và do đó chân 3,3V trên LoRa được kết nối với chân 3,3v trên bo mạch Arduino UNO.
 
-![Sơ đồ mạch kết nối giữa LoRa và Arduino Uno]('./../Circuit-Diagram-for-Connect-Arduino-Lora.png')
+![Sơ đồ mạch kết nối giữa LoRa và Arduino Uno](Circuit-Diagram-for-Connect-Arduino-Lora.png)
 
 | LoRa SX1278 Module | Arduino UNO Board |
 |--------------------|-------------------|
@@ -248,12 +249,82 @@ Mô-đun hoạt động trong 3,3V và do đó chân 3,3V trên LoRa được k�
 | MOSI               | D11               |
 | RST                | D9                |
 
+Chúng tôi đang sử dụng mô-đun Lora được cung cấp từ công ty Seeed Studio. Mô-đun chức năng chính trong Grove - LoRa Radio 433 MHz là RFM98, đây là bộ thu phát có modem tầm xa LoRa cung cấp liên lạc trải phổ cực xa và khả năng chống nhiễu cao trong khi tiêu thụ điện năng thấp.
+Mạch sử dụng chip ATmega168, một con chip được sử dụng rộng rãi với hiệu suất rất cao và tiêu thụ điện năng thấp, đặc biệt phù hợp với dự án này.
+Đây là phiên bản 868 MHz, có thể được sử dụng cho giao tiếp 868 MHz.
+
+![Mạch Grove LoRa](cover.jpg)
+
+**Tính năng**
+
+* Sử dụng mô-đun RFM95 dựa trên SX1276 LoRa®
+* Điện áp tiêu chuẩn: 5V / 3.3V
+* ~ 28mA (Trung bình) @ + 20dBm truyền liên tục
+* ~8.4mA(Avg)@standby chế độ
+* ~ 20mA (Trung bình) chế độ @receive, BW-500kHz
+* Nhiệt độ tiêu chuẩn: -20 - 70 ℃
+* Giao diện: Grove - UART (RX, TX, VCC, GND)
+* Tần số làm việc: 868 MHz / 433 MHz
+* +20dBm 100 mW Khả năng đầu ra công suất
+* Kích thước: 20 * 40mm
+* Tốc độ: 0,3kps ~ 50kps
+* Thư viện Arduino sẵn sàng hoạt động
+
+Từ trang web chính thức, Nền tảng được hỗ trợ chỉ là Arduino. 
+Để làm việc với Raspberry Pi, chúng tôi phải sử dụng thư viện của bên thứ ba từ [**tại đây**](https://github.com/erazor83/pyRFM)
+
+Sơ đồ mạch kết nối giữa Mạch Grove LoRa và Raspberry Pi
+
+![Sơ đồ mạch kết nối giữa Grove LoRa và Raspberry Pi](DefaultConnectionLora_bb.png)
+
+#### Zigbee
+
+![RF Zigbee UART CC2530](zigbee.png)
+
+Mạch thu phát RF Zigbee UART CC2530 V1 sử dụng IC CC2530 từ TI, mạch được lập trình sẵn firmware để có thể dễ dàng sử dụng như một module truyền nhận dữ liệu không dây chuẩn Zigbee với giao tiếp UART rất dễ kết nối với vi điều khiển hoặc máy tính (thông qua cáp chuyển USB-UART) với chỉ một vài bước config bằng nút nhấn.
+
+Mạch thu phát RF Zigbee UART CC2530 V1 có khoảng cách truyền nhận xa, chuẩn truyền sóng Zigbee 2.4Ghz chuẩn công nghiệp rất ổn định và có khả năng cấu hình tạo thành mạng truyền nhận không dây với nhiều nút, điểm mạng khác khau qua giao thức Zigbee.
+
+**Tính năng**
+* Hãng sản xuất danh tiếng Zigbee
+* Tên phiên bản: Zigbee UART CC2530 +PA V2.
+* IC chính: Zigbee CC2530 từ TI, phiên bản nâng cấp có thêm ic Khuếch đại PA CC2591.
+* Hoạt động ở cả 2 chế độ phát và thu.
+* Tốc độ truyền tối đa : 3300Bps (Byte per second ) (bằng 26400 bit/s ). Đối với các ứng dụng Stream như truyền dẫn video hoặc voice (chất lượng thấp) thì bạn có thể sử dụng với tốc độ lên tới 7000 Bps (có thể sẽ mất mát dữ liệu). 
+* Độ nhạy truyền: 20dbm
+* Khoảng cách  truyền xa không dưới 1500m (không vật cản), độ cao truyền sóng không dưới 3.5 km. (không vật cản)
+* Điện áp : 2.8v => 3.5v
+* Dòng tiêu thụ: <50mA.
+* Bộ nhớ flash 256kb
+* Độ nhạy thu : -97dBm với ic PA CC2591 ( -110dBm cho module thường).
+* Tần số sóng mang 2.4GHZ, khả năng bức xạ và xuyên thấu vật cản rất cao.
+* Giao thức Serial (UART) TTL 3.3V, tốc độ giao thức (baudrate) tùy chỉnh từ 2440 tối đa 115200. (2400/4800/9600/14400/19200/38400/57600/115200)
+* Kích thước 1.6 cm x 3.4cm
+
+**USB UART CP2102**
+Bộ chuyển đổi USB này đang sử dụng CP2102 và được sử dụng để chuyển USB sang UART TTL và ngược lại.
+
+Bộ chuyển đổi USB UART CP2102 có thể được sử dụng trên tất cả các nền tảng Windows, Mac, Linux, Android.
+Hỗ trợ tốc độ truyền như 300, 600, 1200, 1800, 2400, 4000, 4800, 7200, 9600, 14400, 16000, 19200, 28800, 38400, 51200, 56000, 57600, 64000, 76800, 115200, 128.000, 153.600, 230.400 , 250.000, 256.000, 460.800, 500.000, 576.000, 921.600 và các loại tốc độ khác.
+
+Để sử dụng bộ chuyển đổi này, chúng tôi cần cài đặt trình điều khiển từ [**Silicon Labs**](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers )
+
+**Sơ đồ kết nối**
+
+| USB UART CP2102 | Zigbee cc2530 |
+|-----------------|---------------|
+| 5V              | 5V            |
+| GND             | GND           |
+| Rx              | Tx            |
+| Tx              | Rx            |
+
+Chúng tôi sử dụng bộ chuyển đổi UART-USB để kết nối mô-đun zigbee với Pi của chúng tôi vì các chân UART trên nó được sử dụng cho mô-đun Lora.
+
 ### Thiết kế cơ sở dữ liệu
 
 ![Cơ sở dữ liệu](db.png)
 
 **Ghi chú** 
-
 
 ## XÂY DỰNG - CÀI ĐẶT HTTT QUẢN LÝ THỊ TRƯỜNG KHCN
 
@@ -262,7 +333,6 @@ Mô-đun hoạt động trong 3,3V và do đó chân 3,3V trên LoRa được k�
 ### XÂY DỰNG HỆ THỐNG
 
 ## MỘT SỐ KẾT QUẢ CHÍNH
-
 
 
 
