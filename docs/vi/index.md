@@ -309,7 +309,17 @@ Hỗ trợ tốc độ truyền như 300, 600, 1200, 1800, 2400, 4000, 4800, 720
 
 Để sử dụng bộ chuyển đổi này, chúng tôi cần cài đặt trình điều khiển từ [**Silicon Labs**](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers )
 
-**Sơ đồ kết nối**
+*Tính năg*
+* Nguồn điện: 3 - 5,5VDC
+* Điện áp: <30mA.
+* Truyền sóng Zigbee 2.4Ghz tiêu chuẩn.
+* Tốc độ truyền tối đa: 3300bps.
+* Dung lượng truyền: 4,5dbm.
+* Khoảng cách: 250m.
+* Kết nối giao thức UART TTL (3.3VDC hoặc 5VDC), Baudrate tối đa 115200.
+* Kích thước: 15,5x31,5mm.
+
+*Sơ đồ kết nối*
 
 | USB UART CP2102 | Zigbee cc2530 |
 |-----------------|---------------|
@@ -331,6 +341,22 @@ Chúng tôi sử dụng bộ chuyển đổi UART-USB để kết nối mô-đun
 ### MÔI TRƯỜNG VÀ CÁC CÔNG CỤ PHÁT TRIỂN
 
 ### XÂY DỰNG HỆ THỐNG
+
+![Khái quát hệ thống](system.png)
+
+Trong vườn, chúng tôi đang sử dụng tổng số mười hai cảm biến để đo dữ liệu độ ẩm của đất trong mỗi bộ lọc.
+Chúng tôi có ba bộ lọc và mỗi bộ lọc có thêm hai bộ lọc phụ với hai cảm biến.
+Tất cả các cảm biến được kết nối với nhau bằng Arduino Mega.
+
+![Tổng quan về giao thức hệ thống](protocol.png)
+
+Để truyền dữ liệu, chúng tôi sử dụng mô-đun zigbee và LoRa. 
+Do đó, Raspberry Pi không thể đọc trực tiếp giá trị tương tự từ cảm biến nên chúng tôi sử dụng Arduino Mega để làm điều đó.
+Và chúng tôi đặt một Raspberry Pi (được gắn với mô-đun Zigbee và Lora), nó sẽ gửi yêu cầu tới Arduino Mega (cũng được gắn với mô-đun Zigbee) để nhận dữ liệu từ cảm biến.
+Chúng tôi cũng thiết lập một cronjob để lên lịch yêu cầu thời gian cho dữ liệu tùy thuộc vào thời gian các bộ lọc sẽ được cung cấp với chất thải.
+
+Sau khi nhận được dữ liệu từ Arduino, Raspberry pi trong vườn sẽ gửi những dữ liệu này đến một Raspberry Pi khác nằm trong Tòa nhà USTH của LoRa. 
+Và dữ liệu sẽ được gửi đến máy chủ USTH bằng giao thức HTTP.
 
 ## MỘT SỐ KẾT QUẢ CHÍNH
 
