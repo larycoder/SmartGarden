@@ -7,7 +7,6 @@ author: \textbf{Member} \newline
         \textit{University of Science and Technology Hanoi} \newline 
         \textit{ICT Department}
 date: {today}
-logo-width: 200
 titlepage: true
 ...
 
@@ -19,7 +18,6 @@ titlepage: true
 
 ## Bài toán thị trường KHCN của dự án Vườn thông minh USTH
 
-Làm vườn rất thú vị, vì vậy chúng tôi nghĩ về việc thực hiện một dự án làm vườn. 
 Ngày nay hệ thống vườn thông minh rất phổ biến vì mọi người thích chúng. 
 Tuy nhiên, thách thức của chúng tôi là làm cho dự án rất đơn giản để bất cứ ai cũng có thể thực hiện điều này.
 Hóa ra, các dự án dựa trên bảng phát triển phần cứng mở Arduino là một nơi tuyệt vời để bắt đầu.
@@ -103,15 +101,16 @@ Có một tỷ lệ nghịch giữa đầu ra cảm biến giá trị và độ 
 
 * Giá trị đầu ra cuối cùng bị ảnh hưởng bởi độ sâu chèn đầu dò và độ chặt của đất xung quanh nó.
 * Phạm vi sẽ được chia thành ba phần: khô, ướt, nước. Giá trị liên quan của chúng là:
-   * Khô: (520 430]
-   * Ướt: (430 350]
-   * Nước: (350 260]
+  * Khô: (520 430]
+  * Ướt: (430 350]
+  * Nước: (350 260]
 
 **Chương trình mẫu**
 \
 Chương trình mẫu của chúng tôi có thể được tìm thấy [**tại đây**](https://github.com/huyhoang8398/SmartGarden/blob/master/Capacitive_Soil_Moisture_Sensor_SKU_SEN0193/ExampleCode/ExampleCode.c)
 
 #### Cảm biến độ ẩm đất điện trở
+
 ![Cảm biến độ ẩm đất điện trở](IMGP5217.jpg)
 
 Cảm biến này đối với Arduino có thể đọc lượng ẩm có trong đất xung quanh nó. Đó là một cảm biến công nghệ thấp, nhưng lý tưởng để theo dõi một khu vườn đô thị, hoặc mực nước của khu vườn tại nhà của bạn. 
@@ -334,11 +333,25 @@ Chúng tôi sử dụng bộ chuyển đổi UART-USB để kết nối mô-đun
 
 ![Cơ sở dữ liệu](db.png)
 
-**Ghi chú** 
+**Lưu ý:** Kiến trúc cơ sở dữ liệu này được xây dựng dựa trên kiến ​​thức hiện tại của chúng tôi về hệ thống. Nó có thể thay đổi trong tương lai do sử dụng thực tế
+
+Trong Cơ sở dữ liệu, Nó chứa 4 bảng là bảng `Sensors_Type`, `Sensor_List`, `Personal_Sensor` và bảng Data.
+
+Chúng tôi đã tạo bảng `Sensor_Type` để phân loại các cảm biến khác nhau như (Độ ẩm, Nhiệt, cảm biến Gia tốc, ..) bằng ID riêng của chúng.
+
+Bảng `Sensor_List` chứa tất cả ID cảm biến, ví dụ: SKU_SEN0114 - viết tắt của Cảm biến độ ẩm đất tương tự.
+
+Bảng `Individual_Sensor` chứa tất cả các cảm biến và mỗi cảm biến có giá trị chỉ mục riêng và vị trí của chúng.
+
+Bảng Data chứa giá trị và thời gian chúng ta đọc giá trị đó từ cảm biến.
 
 ## XÂY DỰNG - CÀI ĐẶT HTTT QUẢN LÝ THỊ TRƯỜNG KHCN
-
 ### MÔI TRƯỜNG VÀ CÁC CÔNG CỤ PHÁT TRIỂN
+
+#### Python 
+
+#### MySQL 
+
 
 ### XÂY DỰNG HỆ THỐNG
 
@@ -359,6 +372,8 @@ Sau khi nhận được dữ liệu từ Arduino, Raspberry pi trong vườn s�
 Và dữ liệu sẽ được gửi đến máy chủ USTH bằng giao thức HTTP.
 
 ## MỘT SỐ KẾT QUẢ CHÍNH
+
+
 
 
 
