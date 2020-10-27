@@ -25,18 +25,17 @@ if ($db->connect()) {
 		$qresult = $db->query($qstr);
 
 		// insert into Individual_Sensor table
-		$qstr = "INSERT INTO Individual_Sensor(Sensor_ID, Coordinate) VALUES('$sensor_id[$type]', $coordinate[$i]);";
+		$qstr = "INSERT INTO Individual_Sensor(Sensor_ID, Position) VALUES('$sensor_id[$type]', '$coordinate[$i]');";
 		$qresult = $db->query($qstr);
-
 	}
 
-	for ($i=0; $i < 100; $i++) { 
+	//for ($i=0; $i < 100; $i++) { 
 		// insert into Data table
-		sleep(2);
-		$index = rand(1, 10); 
-		$val = rand(400, 600);
-		$qstr = "INSERT INTO Data(Time, Sensor_Index, Value) VALUES(CURRENT_TIME(), $index, $val);";
-		$qresult = $db->query($qstr);
+	//	sleep(2);
+	//	$index = rand(1, 10); 
+	//	$val = rand(400, 600);
+	//	$qstr = "INSERT INTO Data(Time, Sensor_Index, Sensor_Reading) VALUES(CURRENT_TIME(), $index, $val);";
+	//	$qresult = $db->query($qstr);
 
 	}
 }
