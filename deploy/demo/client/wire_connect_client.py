@@ -57,10 +57,12 @@ while True:
 
   # build payload
   value = aMoisture.rstrip() # remove carriage return and newline
-  index = '0'
+  index = '1'
   payload = {
 	'ss_index': index,
 	'val': value
   }
-  #req = requests.get(url, params = payload)
-  #print(req.url) # inform server request
+  req = requests.get(url, params = payload)
+  print(req.url) # inform server request
+  print(req.status_code) # inform server status
+  print(req.content)
