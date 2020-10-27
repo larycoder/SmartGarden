@@ -40,5 +40,6 @@ if ($db->connect()) {
 
 	}
 }
+echo 'Done - Do not expect result !!!';
 	
 ?>
