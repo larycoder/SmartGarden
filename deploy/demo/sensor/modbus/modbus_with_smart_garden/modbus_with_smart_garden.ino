@@ -46,8 +46,19 @@ void loop() {
 
   //-------------------------------------------------------------------
   //--------------------------SERIAL INPUT-----------------------------
-  if(debugMain.available()){
-    serialEvent();
+  while(debugMain.available()){
+    char value = debugMain.read();
+    if(value == 'a') debugMain.println("I get a");
+
+    // setup request value
+    buff[0] = 181;
+    buff[1] = 3;
+    buff[2] = 0;
+    buff[3] = 0;
+    buff[4] = 0;
+    index = 5;
+    
+    flagProcess = 1; // active calculator
   }
   
   //-------------------------------------------------------------------
@@ -64,9 +75,9 @@ void loop() {
       int crc_code_check = crc16_modbus(buff,buff[2]+3);
       int crc_HIGH = getHIGHbyte(crc_code_check);
       int crc_LOW = getLOWbyte(crc_code_check);
-      //debugMain.print("CRC_HIGH:"); debugMain.println(crc_HIGH,HEX);
-      //debugMain.print("CRC_LOW:");debugMain.println(crc_LOW,HEX);
-      if((crc_HIGH == buff[buff[2]+3]) && (crc_LOW == buff[buff[2]+4])){
+//      debugMain.print("CRC_HIGH:"); debugMain.println(crc_HIGH);
+//      debugMain.print("CRC_LOW:");debugMain.println(crc_LOW);
+      if((crc_HIGH == buff[buff[2]+3]) && (crc_LOW == buff[buff[2]+4]) || 1 == 1){
         // do something 
 //        debugMain.println("DO SOMETHING/PROCESSING/ANALYSIS DATA HERE.........");
         splitData(buff,processData);
@@ -76,7 +87,7 @@ void loop() {
         TEMPARATURE = TEMP_calculate(processData);
         Kion = Kion_calculate(processData);
 //        debugMain.print("======================================================= ");
-//        debugMain.print("PH: ");  
+//        debugMain.print("PH: ");
         debugMain.println(PH,10);
 //        debugMain.print("TEMPARATURE: ");  
         debugMain.println(TEMPARATURE,10);
@@ -106,7 +117,6 @@ void loop() {
 //=========================IRQ HANDLE==================================
 void serialEvent(){
   while(debugMain.available()){
-    
     int data = debugMain.read();
     if((index >= 2) && (index < MaxIndex)){
       buff[index] = data;
@@ -133,4 +143,14 @@ void serialEvent(){
     }//end if
     //debugMain.println(data,HEX);
   }//end while 
+}
+
+int char2Int(){
+  int value = 0;
+  while(debugMain.available()){
+    char digital = debugMain.read();
+    if(digital == ' ') break; // finish reading 1 integer
+    value = (value * 10) + (int)(digital - '0');
+  }
+  return value;
 }
