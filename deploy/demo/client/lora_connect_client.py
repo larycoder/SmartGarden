@@ -73,8 +73,8 @@ if ll.setOpModeSleep(True,True):
 	    }
 
 	    # send data to server
-	    req = requests.get(url, params = payload)
-	    print(req.url) # inform sending request
+	    #req = requests.get(url, params = payload)
+	    #print(req.url) # inform sending request
 
 	    # re-cron data
 	    ll.sendStr('A')
