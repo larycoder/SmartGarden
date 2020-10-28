@@ -13,7 +13,7 @@ void loop() {
     if (serIn=='A'){ //0
       soilMoistureValue = analogRead(A0); 
       Serial.print(soilMoistureValue);
-      Serial.print("\r");
+      Serial.print("\r\n");
     }
     if (serIn=='B'){ //1
       soilMoistureValue = analogRead(A1); 
@@ -75,4 +75,5 @@ void loop() {
       Serial.print(soilMoistureValue);
       Serial.print("\r");
     }
+  }
 }
