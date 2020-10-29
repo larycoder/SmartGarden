@@ -43,17 +43,18 @@ void setup() {
 //==============================LOOP===================================
 void loop() {
   delay(1000);
-
-  //-------------------------------------------------------------------
-  //--------------------------SERIAL INPUT-----------------------------
-  if(debugMain.available()){
-    serialEvent();
-  }
-  
   //-------------------------------------------------------------------
   //------------------------SENDING REQUEST----------------------------
   send485_command_Read(id_slave,cmd, 0,10);
   delay(300);
+
+  //-------------------------------------------------------------------
+  //------------------------TRIGGER EVENT------------------------------
+  if(debugMain.available()){
+    while(debugMain.available()) char c = debugMain.read(); // remove trigger signal
+    serialEvent();
+    debugMain.println("trigged");
+  }
   
   //-------------------------------------------------------------------
   //---------------------ANALYSIS RECEIVING DATA-----------------------
@@ -76,13 +77,13 @@ void loop() {
         TEMPARATURE = TEMP_calculate(processData);
         Kion = Kion_calculate(processData);
 //        debugMain.print("======================================================= ");
-//        debugMain.print("PH: ");  
+        debugMain.print("PH: 0 ");  
         debugMain.println(PH,10);
-//        debugMain.print("TEMPARATURE: ");  
+        debugMain.print("TEMPARATURE: 1 ");  
         debugMain.println(TEMPARATURE,10);
-//        debugMain.print("NH4N: ");  
+        debugMain.print("NH4N: 2 ");  
         debugMain.println(NH4N,10);
-//        debugMain.print("Kion: ");  
+        debugMain.print("Kion: 3 ");  
         debugMain.println(Kion,10);
 //        debugMain.print("======================================================= ");
         //send485_command_Write(id_slave,16, 10,8,1);
@@ -105,9 +106,11 @@ void loop() {
 //=====================================================================
 //=========================IRQ HANDLE==================================
 void serialEvent(){
-  while(debugMain.available()){
+//  debugMain.println("-------------------------------------------------");
+//  debugMain.println("RECEIVING...");
+  while(Serial.available()){
     
-    int data = debugMain.read();
+    int data = Serial.read();
     if((index >= 2) && (index < MaxIndex)){
       buff[index] = data;
       index++;
@@ -126,6 +129,7 @@ void serialEvent(){
     }//end if
     if(((buff[2]+5)==index)){
       flagProcess = 1;
+//      debugMain.println("DONE:");
 //      for(int i = 0;i<index;i++){
 //        debugMain.print(buff[i],HEX);
 //        debugMain.print(" ");
