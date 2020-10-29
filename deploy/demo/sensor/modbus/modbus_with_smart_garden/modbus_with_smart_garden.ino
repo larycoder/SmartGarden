@@ -43,28 +43,18 @@ void setup() {
 //==============================LOOP===================================
 void loop() {
   delay(1000);
-
-  //-------------------------------------------------------------------
-  //--------------------------SERIAL INPUT-----------------------------
-  while(debugMain.available()){
-    char value = debugMain.read();
-    if(value == 'a') debugMain.println("I get a");
-
-    // setup request value
-    buff[0] = 181;
-    buff[1] = 3;
-    buff[2] = 0;
-    buff[3] = 0;
-    buff[4] = 0;
-    index = 5;
-    
-    flagProcess = 1; // active calculator
-  }
-  
   //-------------------------------------------------------------------
   //------------------------SENDING REQUEST----------------------------
   send485_command_Read(id_slave,cmd, 0,10);
   delay(300);
+
+  //-------------------------------------------------------------------
+  //------------------------TRIGGER EVENT------------------------------
+  if(debugMain.available()){
+    while(debugMain.available()) char c = debugMain.read(); // remove trigger signal
+    serialEvent();
+    debugMain.println("trigged");
+  }
   
   //-------------------------------------------------------------------
   //---------------------ANALYSIS RECEIVING DATA-----------------------
@@ -75,9 +65,9 @@ void loop() {
       int crc_code_check = crc16_modbus(buff,buff[2]+3);
       int crc_HIGH = getHIGHbyte(crc_code_check);
       int crc_LOW = getLOWbyte(crc_code_check);
-//      debugMain.print("CRC_HIGH:"); debugMain.println(crc_HIGH);
-//      debugMain.print("CRC_LOW:");debugMain.println(crc_LOW);
-      if((crc_HIGH == buff[buff[2]+3]) && (crc_LOW == buff[buff[2]+4]) || 1 == 1){
+      //debugMain.print("CRC_HIGH:"); debugMain.println(crc_HIGH,HEX);
+      //debugMain.print("CRC_LOW:");debugMain.println(crc_LOW,HEX);
+      if((crc_HIGH == buff[buff[2]+3]) && (crc_LOW == buff[buff[2]+4])){
         // do something 
 //        debugMain.println("DO SOMETHING/PROCESSING/ANALYSIS DATA HERE.........");
         splitData(buff,processData);
@@ -87,13 +77,13 @@ void loop() {
         TEMPARATURE = TEMP_calculate(processData);
         Kion = Kion_calculate(processData);
 //        debugMain.print("======================================================= ");
-//        debugMain.print("PH: ");
+        debugMain.print("PH: 0 ");  
         debugMain.println(PH,10);
-//        debugMain.print("TEMPARATURE: ");  
+        debugMain.print("TEMPARATURE: 1 ");  
         debugMain.println(TEMPARATURE,10);
-//        debugMain.print("NH4N: ");  
+        debugMain.print("NH4N: 2 ");  
         debugMain.println(NH4N,10);
-//        debugMain.print("Kion: ");  
+        debugMain.print("Kion: 3 ");  
         debugMain.println(Kion,10);
 //        debugMain.print("======================================================= ");
         //send485_command_Write(id_slave,16, 10,8,1);
@@ -116,8 +106,11 @@ void loop() {
 //=====================================================================
 //=========================IRQ HANDLE==================================
 void serialEvent(){
-  while(debugMain.available()){
-    int data = debugMain.read();
+//  debugMain.println("-------------------------------------------------");
+//  debugMain.println("RECEIVING...");
+  while(Serial.available()){
+    
+    int data = Serial.read();
     if((index >= 2) && (index < MaxIndex)){
       buff[index] = data;
       index++;
@@ -136,6 +129,7 @@ void serialEvent(){
     }//end if
     if(((buff[2]+5)==index)){
       flagProcess = 1;
+//      debugMain.println("DONE:");
 //      for(int i = 0;i<index;i++){
 //        debugMain.print(buff[i],HEX);
 //        debugMain.print(" ");
@@ -143,14 +137,4 @@ void serialEvent(){
     }//end if
     //debugMain.println(data,HEX);
   }//end while 
-}
-
-int char2Int(){
-  int value = 0;
-  while(debugMain.available()){
-    char digital = debugMain.read();
-    if(digital == ' ') break; // finish reading 1 integer
-    value = (value * 10) + (int)(digital - '0');
-  }
-  return value;
 }
