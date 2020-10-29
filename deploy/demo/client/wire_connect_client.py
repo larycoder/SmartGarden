@@ -56,13 +56,13 @@ while True:
 	continue
 
     # flush data
-    ser.flushInput()
-    ser.flushOutput()
+    #ser.flushInput()
+    #ser.flushOutput()
 
   #===========================================================
   # send data to server
 
-    print("|=========== send data to server ===========|") # notify send data to server
+    print("|======== send data to server =========|") # notify send data to server
 
     # build payload
     index = aMoisture.split(" ")[1]
@@ -75,4 +75,4 @@ while True:
     print(req.url) # inform server request
     print(req.status_code) # inform server status
     print(req.content)
-    print("|===========================================|\n")
+    print("|======================================|\n")
