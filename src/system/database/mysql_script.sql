@@ -1,0 +1,34 @@
+CREATE TABLE Sensor_Type (
+	Type_ID INT NOT NULL,
+	Type_Name VARCHAR(255) NOT NULL,
+	PRIMARY KEY (Type_ID)
+);
+
+CREATE TABLE Sensor_List (
+	Sensor_ID VARCHAR(255) NOT NULL,
+	Type_ID INT NOT NULL,
+	Name VARCHAR(255) NOT NULL,
+	PRIMARY KEY (Sensor_ID)
+);
+
+CREATE TABLE Individual_Sensor (
+	Sensor_Index INT NOT NULL AUTO_INCREMENT,
+	Sensor_ID VARCHAR(255) NOT NULL,
+	Position VARCHAR(255) NOT NULL,
+	PRIMARY KEY (Sensor_Index)
+);
+
+CREATE TABLE Data (
+	Data_Index INT NOT NULL AUTO_INCREMENT, 
+	Time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	Sensor_Index INT NOT NULL,
+	Sensor_Reading FLOAT NOT NULL,
+	PRIMARY KEY (Data_Index)
+);
+
+ALTER TABLE Sensor_List ADD CONSTRAINT Sensor_List_fk0 FOREIGN KEY (Type_ID) REFERENCES Sensor_Type(Type_ID);
+
+ALTER TABLE Data ADD CONSTRAINT Data_fk0 FOREIGN KEY (Sensor_Index) REFERENCES Individual_Sensor(Sensor_Index);
+
+ALTER TABLE Individual_Sensor ADD CONSTRAINT Individual_fk0 FOREIGN KEY (Sensor_ID) REFERENCES Sensor_List(Sensor_ID);
+
