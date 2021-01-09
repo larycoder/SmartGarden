@@ -47,7 +47,7 @@ if __name__ == '__main__':
         test_lora.printVersion()
         print("Lora setup OpMode...")
         test_lora.setOpMode()
+        print("Done :)")
     except Exception as e:
         print("Oop !!! Something wrong happen with message:")
         print(e)
-    print("Done :)")
