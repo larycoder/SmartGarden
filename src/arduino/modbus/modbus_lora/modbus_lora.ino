@@ -51,21 +51,24 @@ void processMess(){
      
     // DEMO message
     char *offset= lora_buff;
+    memcpy(offset, 23*4, 4);
+    offset += 4;
+
     memcpy(offset, "PH", 3);
     memcpy(offset+15, 0, 4);
-    memcpy(offset+19, &PH, 4);
-    
+    memcpy(offset+19, &PH, 4);    
     offset += 23;
+
     memcpy(offset, "TEMPARATURE", 12);
     memcpy(offset+15, 1, 4);
     memcpy(offset+19, &TEMPARATURE, 4);
-
     offset += 23;
+
     memcpy(offset, "NH4N", 5);
     memcpy(offset+15, 1, 4);
     memcpy(offset+19, &NH4N, 4);
-
     offset += 23;
+
     memcpy(offset, "Kion", 5);
     memcpy(offset+15, 1, 4);
     memcpy(offset+19, &Kion, 4);
