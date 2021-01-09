@@ -78,4 +78,4 @@ if ll.setOpModeSleep(True,True):
 
 	    # re-cron data
 	    ll.sendStr('A')
-	    ll.wiatPacketSent()
+	    ll.waitPacketSent()
