@@ -3,7 +3,7 @@
 from config import config
 from lora import LoraHandler
 from server import ServerHandler
-import time
+import time, sys
 
 
 def parseRecv(mess):
@@ -36,10 +36,15 @@ def parseRecv(mess):
 def run(lora, server): 
     # TODO: implementation for main service of Raspberry 
     ## DEMO ##
-    lora.send(b'0') # send any signal
-    time.sleep(1)
-    data = lora.recv(3) # timeout = 3s
-    data_list = parseRecv(data)
+    lora.send('Hello world') # send any signal
+    #time.sleep(1)
+    data = lora.recv(None) # timeout = 3s
+    #data_list = parseRecv(data) if data != None else ()
+    
+    # NOTE: code test
+    print("Dubeg Mode -- Data: " + str(data))
+    return
+
     for data in data_list:
         payload = server.getPayload(**data)
         server.send(payload)
@@ -60,13 +65,15 @@ if __name__ == '__main__':
     except Exception as e:
         print("Oops !!! Some thing wrong in initialization, message: ")
         print(e)
+        sys.exit(1) # stop program
 
     try:
         # TODO: loop process
         print("Service running...")
         while(True):
-            #run(lora, usth)
+            run(lora, usth)
             pass
     except Exception as e:
         print("Oops !!! Some thing wrong during running, message: ")
         print(e)
+        sys.exit(1) # stop program

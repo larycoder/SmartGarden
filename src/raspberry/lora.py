@@ -1,5 +1,9 @@
 # This file provide handler for lora protocol
 import lib as pyrfm
+import serial, time
+
+# TODO: define list of message variable
+LORA_MAX_BUFF=255 # bytes
 
 
 class LoraHandler():
@@ -26,28 +30,82 @@ class LoraHandler():
             raise Exception("Could not set op mode to sleep :(")
 
     def send(self, mess):
-        self.ll.send(mess)
-        self.ll.waitPacketSend()
+        self.ll.sendStr(mess)
+        self.ll.waitPacketSent()
 
     def recv(self, timeout):
-        if self.ll.waitRx(timeout = timeout):
+        if self.ll.waitRX(timeout = timeout):
             return self.ll.recv()
         else:
             # TODO: implement log for receiving nothing
-            pass
+            return None
+
+
+class LoraSerial():
+    def __init__(self, conf):
+        self.con = serial.Serial(
+                port=conf['config']['pl']['port'],
+                baudrate=112500,
+                timeout=0.5
+        )
+        if self.con == None:
+            raise Exception('Could not open serial connection :(')
+
+    def read(self, timeout):
+        start = time.time()
+        while True:
+            if self.con.inWaiting():
+                # TODO: return data from buffer
+                return self.con.read(LORA_MAX_BUFF)
+            elif time.time() - start > timeout:
+                return False
+
+    def available(self):
+        return self.con.inWaiting()
+
+    def write(self, mess, delay=0.5):
+        self.con.write(mess)
+        sleep(delay) # delay for writing data
 
 
 # test only code
 if __name__ == '__main__':
-    print("This code provide a wrapper class for lora protocol handler")
-    print("Lora connection...")
-    from config import config
-    try:
-        test_lora = LoraHandler(config['lora'])
-        test_lora.printVersion()
-        print("Lora setup OpMode...")
-        test_lora.setOpMode()
-        print("Done :)")
-    except Exception as e:
-        print("Oop !!! Something wrong happen with message:")
-        print(e)
+    import sys
+    def printUsage():
+        print("Usage:")
+        print("--> lora   : testing LoraHandler")
+        print("--> serial : testing SerialHandler")
+    
+    if len(sys.argv) != 2:
+        printUsage()
+        sys.exit(1)
+
+    arg = sys.argv[1]
+    if arg == 'lora':
+        # TODO: lora protocol test code
+        print("This code provide a wrapper class for lora protocol handler")
+        print("Lora connection...")
+        from config import config
+        try:
+            test_lora = LoraHandler(config['lora'])
+            test_lora.printVersion()
+            print("Lora setup OpMode...")
+            test_lora.setOpMode()
+            print("Done :)")
+        except Exception as e:
+            print("Oop !!! Something wrong happen with message:")
+            print(e)
+    elif arg == 'serial':
+        # TODO: serial protocol test code
+        print("This code provide a wrapper class for serial protocol handler")
+        print("Serial connection...")
+        from config import config
+        try:
+            test_serial = LoraSerial(config['lora'])
+            print("Done :)")
+        except Exception as e:
+            print("Oop !!! Something wrong happen with message:")
+            print(e)
+    else:
+        printUsage()
+        sys.exit(1)
