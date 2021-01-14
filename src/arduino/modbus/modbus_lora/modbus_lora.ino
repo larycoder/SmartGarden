@@ -17,8 +17,8 @@ void loop() {
       break;
     case End:
       // TODO: do something when lora done reading data
-      modbusRun();
-      delay(1000); // waiting for modbus process
+      //modbusRun();
+      delay(300); // waiting for modbus process
       processMess();
       loraSend(); 
       break;
@@ -37,6 +37,7 @@ void processMess(){
     char data[lora_buff_size];
     memcpy(data, lora_buff, lora_buff_size);
     memset(lora_buff, 0, lora_buff_size);
+    Serial.println((char*)data);
     
     // TODO: process message
     /*
@@ -50,26 +51,31 @@ void processMess(){
      */
      
     // DEMO message
-    char *offset= lora_buff;
-    memcpy(offset, 23*4, 4);
+    uint8_t *offset= lora_buff;
+    int value = 23*4;
+    memcpy(offset, &value, 4);
     offset += 4;
 
+    value = 0;
     memcpy(offset, "PH", 3);
-    memcpy(offset+15, 0, 4);
+    memcpy(offset+15, &value, 4);
     memcpy(offset+19, &PH, 4);    
     offset += 23;
 
+    value = 1;
     memcpy(offset, "TEMPARATURE", 12);
-    memcpy(offset+15, 1, 4);
+    memcpy(offset+15, &value, 4);
     memcpy(offset+19, &TEMPARATURE, 4);
     offset += 23;
 
+    value = 2;
     memcpy(offset, "NH4N", 5);
-    memcpy(offset+15, 1, 4);
+    memcpy(offset+15, &value, 4);
     memcpy(offset+19, &NH4N, 4);
     offset += 23;
 
+    value = 3;
     memcpy(offset, "Kion", 5);
-    memcpy(offset+15, 1, 4);
+    memcpy(offset+15, &value, 4);
     memcpy(offset+19, &Kion, 4);
 }

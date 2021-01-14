@@ -12,7 +12,7 @@ bool loraInit() {
   // If you are using RFM95/96/97/98 modules which uses the PA_BOOST transmitter pin, then 
   // you can set transmitter powers from 5 to 23 dBm:
   //rf95.setTxPower(13, false);
-  rf95.setFrequency(434.0);
+  if(!rf95.setFrequency(LORA_FREQ)) return false;
   return true;
 }
 

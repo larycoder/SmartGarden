@@ -7,5 +7,5 @@
 
 //==[ LORA ]==
 //============
-#define LORA_RX_PIN  10
-#define LORA_TX_PIN  11
+#define LORA_RX_PIN  3
+#define LORA_TX_PIN  2

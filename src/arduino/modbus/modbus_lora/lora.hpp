@@ -4,8 +4,15 @@
 #include <RH_RF95.h>
 
 /*
+ * Lora frequency
+ * 
+ */
+#define LORA_FREQ 868.0
+
+/*
  * Lora Message
  */
-uint8_t lora_buff[RH_RF95_MAX_MESSAGE_LEN]; // max FIFO size: 251 bytes
-uint8_t lora_buff_size = RH_RF95_MAX_MESSAGE_LEN;
+#define LORA_MAX_BUFF 255
+uint8_t lora_buff[LORA_MAX_BUFF]; // max FIFO size: 251 bytes
+uint8_t lora_buff_size = LORA_MAX_BUFF;
 enum MessStatus{NotAvail, Fail, End, Avail};
