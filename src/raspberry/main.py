@@ -1,7 +1,7 @@
 # This file provide main code allowing pi interact, process and transfer sensor data from lora to db
 
 from config import config
-from lora import LoraHandler
+from lora import LoraHandler, LoraSerial
 from server import ServerHandler
 import time, sys
 
@@ -38,7 +38,7 @@ def run(lora, server):
     ## DEMO ##
     lora.send('Hello world') # send any signal
     #time.sleep(1)
-    data = lora.recv(None) # timeout = 3s
+    data = lora.recv(3) # timeout = 3s
     #data_list = parseRecv(data) if data != None else ()
     
     # NOTE: code test
@@ -58,8 +58,9 @@ if __name__ == '__main__':
     try:
         # TODO: init handlers
         print("Init Lora Connection...")
-        lora = LoraHandler(config['lora'])
-        lora.setOpMode()
+        lora = LoraSerial(config['lora'])
+        lora.flush()
+
         print("Init Server Connection...")
         usth = ServerHandler(config['server'])
     except Exception as e:
