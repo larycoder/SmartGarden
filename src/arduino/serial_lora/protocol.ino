@@ -18,7 +18,8 @@ bool loraWait(int timeout){
 
 
 bool loraRecv(){
-  return rf95.recv(lora_buff, f_buff);
+  uint8_t len = MAX_BUFF;
+  return rf95.recv(lora_buff, &len);
 }
 
 
@@ -115,7 +116,7 @@ void readSerial(){
       Serial.write(loraRecv()?0x00:0x01); // 0 mean received
       break;
     default:
-      Serial.flush(); // flush data
+      while(Serial.available()) Serial.read();
       break;
   }  
 }

@@ -6,7 +6,7 @@
 #define S_RX              10
 #define S_TX              11
 
-#define BAUDRATE          115200
+#define BAUDRATE          9600
 #define MAX_BUFF   255
 
 #define LORA_FREQ         868.0
