@@ -16,10 +16,11 @@ bool loraInit() {
   return true;
 }
 
-MessStatus loraRecv() {
-  if(rf95.available()) { // wait until partner send something
+MessStatus loraRecv(int timeout) {
+  if(rf95.waitAvailableTimeout(timeout)) { // wait until partner send something
     // Should be a message for us now
-    if(rf95.recv(lora_buff, &lora_buff_size)) {
+    uint8_t len = lora_buff_size;
+    if(rf95.recv(lora_buff, &len)) {
       if(rf95.available()) return Avail;
       return End;
     }
@@ -28,8 +29,8 @@ MessStatus loraRecv() {
   return NotAvail;
 }
 
-void loraSend() {
+void loraSend(int len) {
   // send message
-  rf95.send(lora_buff, lora_buff_size);
+  rf95.send(lora_buff, len);
   rf95.waitPacketSent();
 }
