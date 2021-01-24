@@ -4,11 +4,12 @@
 
 void setup() {
   modbusInit();
-  loraInit();
+  if(loraInit()) ; //Serial.println("Init Lora Success");
+  //else Serial.println("Init Lora Failed");
 }
 
 void loop() {
-  switch(loraRecv()){
+  switch(loraRecv(1000)){
     case NotAvail:
       // TODO: do something when lora not available
       break;
@@ -17,10 +18,19 @@ void loop() {
       break;
     case End:
       // TODO: do something when lora done reading data
-      //modbusRun();
-      delay(300); // waiting for modbus process
+      modbusRun();
+      delay(300); // waiting for modbus process 
+
+      // DEBUG only
+      //Serial.print("Recv mess: ");
+      //Serial.write(lora_buff, lora_buff_size);
+      //Serial.println("");
+      //testMess();
+      //Serial.print("Send back data: ");
+      //Serial.write(lora_buff, lora_buff_size);
+      
       processMess();
-      loraSend(); 
+      loraSend();
       break;
     case Avail:
       // TODO: do something when lora message available
@@ -29,15 +39,25 @@ void loop() {
       // TODO: do something when
       break;
   }
-  
 }
+
+
+void testMess(){
+      // preprocess data
+      char data[lora_buff_size];
+      memcpy(data, lora_buff, lora_buff_size);
+      memset(lora_buff, 0, lora_buff_size);
+
+      // send back data
+      memcpy(lora_buff, data, lora_buff_size-7);
+}
+
 
 void processMess(){
     // preprocess data
     char data[lora_buff_size];
     memcpy(data, lora_buff, lora_buff_size);
     memset(lora_buff, 0, lora_buff_size);
-    Serial.println((char*)data);
     
     // TODO: process message
     /*

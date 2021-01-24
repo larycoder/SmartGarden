@@ -29,8 +29,9 @@ MessStatus loraRecv(int timeout) {
   return NotAvail;
 }
 
-void loraSend(int len) {
+void loraSend() {
   // send message
+  int len = LORA_MAX_SEND;
   rf95.send(lora_buff, len);
   rf95.waitPacketSent();
 }

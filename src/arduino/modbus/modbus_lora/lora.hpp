@@ -12,6 +12,7 @@
 /*
  * Lora Message
  */
+#define LORA_MAX_SEND 100 // number of bytes for a single send
 #define LORA_MAX_BUFF 255
 uint8_t lora_buff[LORA_MAX_BUFF]; // max FIFO size: 251 bytes
 uint8_t lora_buff_size = LORA_MAX_BUFF;
