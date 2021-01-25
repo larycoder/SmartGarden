@@ -41,6 +41,7 @@ def run(lora, server):
     data_list = parseRecv(data) if data != b'' else []
 
     for data in data_list:
+        print('Payload Sending: ', data)
         payload = server.getPayload(**data)
         server.send(payload)
         if server.getResponse().status_code != 200:

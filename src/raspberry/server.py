@@ -20,7 +20,7 @@ class ServerHandler():
 
     def getPayload(self, *args,**kwargs):
         try:
-            if args != None:
+            if args:
                 return {
                     'ss_index': args[0],
                     'val': args[1]
