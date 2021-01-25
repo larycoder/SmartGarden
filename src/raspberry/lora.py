@@ -1,6 +1,6 @@
 # This file provide handler for lora protocol
 import lib as pyrfm
-from serial_protocol import SerialProtocol
+from lib.customized_lib.serial_protocol import getSP
 import serial, time
 
 # TODO: define list of message variable
@@ -45,12 +45,10 @@ class LoraHandler():
 
 class LoraSerial():
     def __init__(self, conf):
-        self.con = serial.Serial(
-                port=conf['config']['pl']['port'],
-                baudrate=112500,
-                timeout=0.5
-        )
-        self.lora = SerialProtocol(self.con)
+        port = conf['config']['pl']['port']
+        self.con = serial.Serial(port, baudrate=9600)
+        mySP = getSP()
+        self.lora = mySP(self.con)
         if self.con == None or self.lora == None:
             raise Exception('Could not open serial connection :(')
 
@@ -60,11 +58,16 @@ class LoraSerial():
             if self.lora.loraAvail():
                 # TODO: read data available
                 time.sleep(LORA_WAIT) # wait for lora reading
-                return self.lora.readLora()
+                
+                data = b''
+                while(self.lora.loraAvail()):
+                    data += self.lora.readLora()
+                return data
             elif time.time() - start >= timeout:
                 return None
 
     def send(self, data):
+        data = [ord(c) for c in data] # convert string to data
         self.lora.sendLora(data)
         time.sleep(LORA_WAIT) # wait for lora sending 
 

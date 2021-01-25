@@ -7,43 +7,38 @@ import time, sys
 
 
 def parseRecv(mess):
-    # This function parse data received from arduino
-    # message rule:
-    # - first 4 bytes = record size of data content
-    # - data content = include list of message packs
-    # - the message pack = hold data of single sensors
-    # - message pack construct:
-    #   + name sensor  : 15 bytes (string)
-    #   + id sensor    : 4  bytes (int)
-    #   + value sensor : 4  bytes (float)
-    #   + pack size    : 23 bytes
-    
-    # TODO: implementation for message parser
-    mess_size = int(mess[0:4])
-    mess = mess[4:len(mess)]
-    pack_num = mess_size / 23
-    pack_list = ()
-    for i in range(pack_num):
-        pack_data = mess[i*23+15:(i+1)*23]
-        pack = {
-            'id': int(pack_data[0:4]),
-            'val': float(pack_data[4:8])
-        }
-        pack_list.append(pack)
-    return pack_list
+    # NOTE: Data will be decrypted on Arduino side, this func will collect info from string data only
+    ## decode
+    mess = mess.decode('UTF-8')
+
+    ## get number of bytes
+    data_list = mess.split('\r\n')
+    num_bytes = int(data_list[0].replace('Num Bytes: ', ''))
+    size = int(num_bytes / 23)
+
+    data_list = data_list[1:] # get sensor info
+    payload_list = []
+    for i in range(size):
+        try:
+            payload = {
+                    'id': int(data_list[1].replace('Sensor id', '').replace(':', '')),
+                    'val':  float(data_list[2].replace('Sensor value', '').replace(':', ''))
+
+            }
+            payload_list.append(payload)
+            data_list = data_list[3:]
+        except:
+            pass
+    return payload_list
 
 
 def run(lora, server): 
     # TODO: implementation for main service of Raspberry 
     ## DEMO ##
-    lora.send('Hello world') # send any signal
-    #time.sleep(1)
+    lora.send('H') # send any signal
+    time.sleep(0.5) # wait for data writting
     data = lora.recv(3) # timeout = 3s
-    #data_list = parseRecv(data) if data != None else ()
-    
-    # NOTE: code test
-    print("Dubeg Mode -- Data: " + str(data))
-    return
+    data_list = parseRecv(data) if data != b'' else []
 
     for data in data_list:
         payload = server.getPayload(**data)

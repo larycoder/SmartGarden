@@ -4,7 +4,7 @@
 /** INIT CODE **/
 void setup() {
     Serial.begin(BAUDRATE);
-    if(loraInit()) Serial.println("Init lora success");
+    if(loraInit()) ; //Serial.println("Init lora success");
     else Serial.println("Init lora failed");
 }
 
@@ -13,27 +13,28 @@ void setup() {
 void loop() {
     // process data from serial
     if(Serial.available()){
+      delay(500); // wait for data writing
       memset(lora_buff, 0, MAX_BUFF); // clean buffer
       uint8_t len = Serial.readBytes(lora_buff, MAX_BUFF);
       loraSend(len);
-      Serial.print("Send data: ");
-      Serial.write(lora_buff, MAX_BUFF);
-      Serial.println("");  
+      //Serial.print("Send data: ");
+      //Serial.write(lora_buff, MAX_BUFF);
+      //Serial.println("");  
       memset(lora_buff, 0, MAX_BUFF); // clear buffer
     }
 
     // process data from lora - wait 1 sec
     if(loraWait(1000)){
       memset(lora_buff, 0, MAX_BUFF); // clear buffer
-      if(loraRecv()) decryptDataTest();
-      else Serial.println("Error could not get data !!!");
+      if(loraRecv()) decryptData();
+      //else Serial.println("Error could not get data !!!");
       memset(lora_buff, 0, MAX_BUFF); // clear buffer
     }
 }
 
 
-void decryptDataTest(){
-    Serial.println("Decrypted Data: ");
+void decryptData(){
+    //Serial.println("Decrypted Data: ");
     int value;
     uint8_t *offset = lora_buff;
 
@@ -61,5 +62,5 @@ void decryptDataTest(){
         Serial.print("Sensor value : "); memcpy(&value, offset, 4); Serial.println(value); offset+= 4;
     }
     
-    Serial.println("");
+    //Serial.println("");
 }
