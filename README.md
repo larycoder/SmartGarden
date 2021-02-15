@@ -10,4 +10,5 @@ USTH Smart Garden
 |src | include project main code (in process) |
 
 # Smart Gardent Architect
+
 ![Smart Gardent](docs/pics/SmartGardent_Architect.svg)
