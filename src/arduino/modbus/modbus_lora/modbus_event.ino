@@ -13,9 +13,6 @@ void modbusRun() {
   //------------------------SENDING REQUEST----------------------------
   send485_command_Read(id_slave,cmd, 0,10);
   delay(300);
-
-  // process event
-  serialEvent();
   
   //-------------------------------------------------------------------
   //---------------------ANALYSIS RECEIVING DATA-----------------------
