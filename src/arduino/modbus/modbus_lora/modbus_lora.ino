@@ -2,6 +2,9 @@
 #include "lora.hpp"
 #include "modbus.hpp"
 
+
+//=======================================================================
+//=========================MAIN PROCESS==================================
 void setup() {
   modbusInit();
   if(loraInit()) ; //Serial.println("Init Lora Success");
@@ -9,6 +12,9 @@ void setup() {
 }
 
 void loop() {
+  delay(1000); // waiting for modbus process
+  modbusRun();
+  
   switch(loraRecv(1000)){
     case NotAvail:
       // TODO: do something when lora not available
@@ -18,9 +24,7 @@ void loop() {
       break;
     case End:
       // TODO: do something when lora done reading data
-      modbusRun();
-      delay(300); // waiting for modbus process 
-
+      
       // DEBUG only
       //Serial.print("Recv mess: ");
       //Serial.write(lora_buff, lora_buff_size);
@@ -42,6 +46,16 @@ void loop() {
 }
 
 
+//=====================================================================
+//=========================IRQ HANDLE==================================
+void serialEvent(){
+  modbusEvent();
+}
+
+
+
+//=======================================================================
+//=========================SUPPORT FUNC==================================
 void testMess(){
       // preprocess data
       char data[lora_buff_size];

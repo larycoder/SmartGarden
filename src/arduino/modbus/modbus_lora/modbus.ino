@@ -17,7 +17,7 @@ void send485_command_Read(int id_slave,int command, unsigned int address,unsigne
   crc_code=crc16_modbus(dataModbus,6);
   dataModbus[6] = getHIGHbyte(crc_code);
   dataModbus[7] = getLOWbyte(crc_code);
-//  debugMain.println("----------------------");
+  //debugMain.println("----------------------");
   digitalWrite(EN_PIN,HIGH); delay(10);
   for(int i=0;i<8;i++){
     Serial.write(dataModbus[i]);
@@ -59,7 +59,7 @@ void send485_command_Write(int id_slave,int command, unsigned int address,unsign
   crc_code=crc16_modbus(dataModbus,i+1);
   dataModbus[i=i+1] = getHIGHbyte(crc_code);
   dataModbus[i=i+1] = getLOWbyte(crc_code);
-//  debugMain.println("----------------------");
+  //debugMain.println("----------------------");
   
   digitalWrite(EN_PIN,HIGH); delay(10);
   for(int a=0;a<=i;a++){

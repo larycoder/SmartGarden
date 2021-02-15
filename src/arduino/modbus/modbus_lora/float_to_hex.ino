@@ -4,11 +4,11 @@
 //==============================split data to analysis=====================================
 void splitData(unsigned int * data,unsigned int * data2){
   unsigned int len = data[2];
-//  debugMain.println("split data");
+  //debugMain.println("split data");
   for(int i=0; i< len; i++){
     data2[i] = data[i+3];
-//    debugMain.print(data2[i],HEX);
-//    debugMain.print(" ");
+    //debugMain.print(data2[i],HEX);
+    //debugMain.print(" ");
   }
 }
 
@@ -26,8 +26,8 @@ float convertHexToFloat(unsigned int * data){
   
   //-------------------------------SIGN CALCULATION----------------------------------------
   sign =  ((data[0] & 0x80)>>7);      //sign of data (+/-)
-//  debugMain.print("SIGN :");
-//  debugMain.println(sign);
+  //debugMain.print("SIGN :");
+  //debugMain.println(sign);
   
   //---------------------------------------------------------------------------------------
   //-----------------------------EXPONENT CALCULATION--------------------------------------
@@ -35,8 +35,8 @@ float convertHexToFloat(unsigned int * data){
 //  debugMain.print("subExponent :");
 //  debugMain.println(subExponent);
   exponent = pow(2,subExponent);
-//  debugMain.print("exponent :");
-//  debugMain.println(exponent);
+  //debugMain.print("exponent :");
+  //debugMain.println(exponent);
   
   //---------------------------------------------------------------------------------------
   //-----------------------------MANTISSA CALCULATION--------------------------------------
@@ -54,16 +54,16 @@ float convertHexToFloat(unsigned int * data){
       delay(20);
     }
   }
-//  debugMain.print("MANTISSA FILNAL : ");  
-//  debugMain.println(mantissa,10);
+  //debugMain.print("MANTISSA FILNAL : ");  
+  //debugMain.println(mantissa,10);
   //---------------------------------------------------------------------------------------
   //---------------------------FLOAT DATA CALCULATION--------------------------------------
   finalDataConvert = exponent*mantissa;
   if(sign == 1){
     finalDataConvert = 0 - finalDataConvert;
   }
-//  debugMain.print("final DATA: ");  
-//  debugMain.println(finalDataConvert,10);
+  //debugMain.print("final DATA: ");  
+  //debugMain.println(finalDataConvert,10);
   mantissa = 1;
   return finalDataConvert;
 }

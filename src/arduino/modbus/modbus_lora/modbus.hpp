@@ -22,7 +22,7 @@ float mantissa = 1;
 
 //-----------------------CHEMICALS VAR-----------------------------------
 
-float NH4N = 0;
-float TEMPARATURE = 0;
-float Kion = 0;
-float PH = 0;
+float NH4N = 0.1;
+float TEMPARATURE = 0.1;
+float Kion = 0.1;
+float PH = 0.1;
