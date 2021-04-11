@@ -37,11 +37,12 @@ def run(lora, server):
     ## DEMO ##
     lora.send('H') # send any signal
     time.sleep(0.5) # wait for data writting
-    data = lora.recv(3) # timeout = 3s
-    data_list = parseRecv(data) if data != b'' else []
+    data = lora.recv(10) # timeout = 4s
+    print("[INFO] Raw Data: ", data)
+    data_list = parseRecv(data) if data else []
 
     for data in data_list:
-        print('Payload Sending: ', data)
+        print('[INFO] Payload Sending: ', data)
         payload = server.getPayload(**data)
         server.send(payload)
         if server.getResponse().status_code != 200:

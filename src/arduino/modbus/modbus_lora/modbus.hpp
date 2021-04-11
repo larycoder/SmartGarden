@@ -4,7 +4,7 @@
 
 //=====================================================================
 //--------------------------SLAVE VAR----------------------------------
-int id_slave = 181;                    //ID slave device
+int id_slave = 2;                    //ID slave device
 int cmd = 3;                           //request funtion in modbus RTU
 //-----------------------TRANSCEIVER VAR-------------------------------
 unsigned int MaxIndex = 50;            //max buffer

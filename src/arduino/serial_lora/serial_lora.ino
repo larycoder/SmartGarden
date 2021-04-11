@@ -12,7 +12,7 @@ void setup() {
 /** COMMUNICATION CODE **/
 void loop() {
     // process data from serial
-    if(Serial.available() || 1){
+    if(Serial.available()){
       delay(1000); // wait for data writing
       memset(lora_buff, 0, MAX_BUFF); // clean buffer
       uint8_t len = Serial.readBytes(lora_buff, MAX_BUFF);
